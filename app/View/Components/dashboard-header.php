@@ -12,9 +12,9 @@ class dashboard-header extends Component
      * @return void
      */
     public function __construct()
-    {
-        //
-    }
+{
+    //
+}
 
     /**
      * Get the view / contents that represent the component.
@@ -22,7 +22,7 @@ class dashboard-header extends Component
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     public function render()
-    {
-        return view('components.dashboard-header');
-    }
+{
+    return view('components.dashboard-header');
+}
 }

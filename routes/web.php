@@ -18,12 +18,16 @@ use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\GeneralSettingController;
 
 require __DIR__ . '/auth.php';
+//
+//Route::get('/', function () {
+//    return to_route('login');
+//});
 
 Route::get('/', function () {
-    return to_route('login');
+    return view('site.site');
 });
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['prefix' =>'admin','middleware' => ['auth', 'verified']], function () {
     // Dashboards
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard.index');
     // Locale

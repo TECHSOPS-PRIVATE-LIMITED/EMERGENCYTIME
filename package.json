@@ -19,6 +19,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.5.2",
         "@fullcalendar/core": "^6.1.5",
         "@fullcalendar/daygrid": "^6.1.5",
         "@fullcalendar/list": "^6.1.5",
@@ -31,6 +32,7 @@
         "datatables.net-dt": "^1.13.4",
         "dragula": "^3.7.3",
         "dropzone": "^6.0.0-beta.2",
+        "font-awesome": "^4.7.0",
         "iconify-icon": "^1.0.1",
         "jquery": "^3.6.4",
         "jquery-validation": "^1.19.5",
