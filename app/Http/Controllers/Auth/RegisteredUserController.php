@@ -37,11 +37,12 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+//        'email:rfc,dns'
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string','email','max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'terms' => ['required', 'accepted'],
+//            'terms' => ['required', 'accepted'],
         ]);
 
         $user = User::create([
@@ -56,10 +57,15 @@ class RegisteredUserController extends Controller
             return to_route('register')->with('error', $e->getMessage());
         }
 
-        event(new Registered($user));
+//        event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // Check the role of the logged-in user and redirect accordingly
+        if ($user->hasRole('admin') || $user->hasRole('super-admin')) {
+            return redirect('/admin/dashboard');
+        } else {
+            return redirect('/');
+        }
     }
 }

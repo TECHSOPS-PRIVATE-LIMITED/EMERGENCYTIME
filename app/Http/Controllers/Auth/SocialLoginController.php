@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
@@ -30,8 +28,13 @@ class SocialLoginController extends Controller
             return back()->with('error', $e->getMessage());
         }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
-    }
+        if ($user->hasRole('admin') || $user->hasRole('super-admin')) {
+            // Redirect to admin dashboard if user is admin or super-admin
+            return redirect()->intended('/admin/dashboard');
+        } else {
+            // Redirect to homepage for other users
+            return redirect()->intended('/');
+        }    }
 
     public function oauthLogin($user)
     {

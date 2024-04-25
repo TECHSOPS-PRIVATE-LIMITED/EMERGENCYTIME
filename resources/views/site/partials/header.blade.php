@@ -27,6 +27,17 @@
                         <li><a class="nav-item" href="#pricing">Pricing</a></li>
                         <li><a class="nav-item" href="#testimonial">Testimonial</a></li>
                         <li><a class="nav-item" href="#contacts">Contact Us</a></li>
+                        @auth
+                            <li>
+                                <a class="nav-item" style="padding: 10px; background-color: black; border-radius: 5px;">
+                                    {{ \Illuminate\Support\Str::limit(Auth::user()->name, 15, '') }}</a>
+                            </li>
+                        @else
+                            <li>
+                                <a class="nav-item" style="padding: 10px; background-color: black; border-radius: 5px;" href="{{ route('login') }}">
+                                    {{ __('Register/Login') }}</a>
+                            </li>
+                        @endauth
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container -->
