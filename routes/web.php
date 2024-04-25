@@ -23,8 +23,12 @@ require __DIR__ . '/auth.php';
 //    return to_route('login');
 //});
 
-Route::get('/', function () {
-    return view('site.site');
+Route::group(['middleware' => ['auth']],function () {
+
+    Route::get('/', function () {
+        return view('site.site');
+    });
+
 });
 
 Route::group(['prefix' =>'admin','middleware' => ['auth', 'verified']], function () {

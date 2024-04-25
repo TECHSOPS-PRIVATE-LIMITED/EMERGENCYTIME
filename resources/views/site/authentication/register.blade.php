@@ -6,37 +6,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('site/assets/css/sign-up-style.css') }}">
-    <title>Emergency Time</title>
+    <title>{{ __('Emergency Time') }}</title>
 </head>
 <body>
 <div class="container" id="container">
+
+{{-- sign up form start--}}
     <div class="form-container sign-up">
-        <form>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+            @method('POST')
             <h1>Create Account</h1>
             <div class="social-icons">
                 <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                 <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
             </div>
             <span>or use your email password</span>
-            <input type="text" name="name" placeholder="Name" >
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <button>Sign Up</button>
+{{-- name --}}
+            <input type="text" name="name" placeholder="Name" required>
+            @error('name')
+            <div class="error-message">{{ $message }}</div>  <
+            @enderror
+
+{{-- email --}}
+            <input type="email" name="email" placeholder="Email" required>
+            @error('email')
+            <div class="error-message">{{ $message }}</div>
+            @enderror
+
+{{--passowrd--}}
+            <input type="password" name="password" placeholder="Password" required autocomplete="new-password">
+            @error('password')
+            <div class="error-message">{{ $message }}</div>
+            @enderror
+
+{{-- confirm password --}}
+            <input type="password" name="password_confirmation" placeholder="Confirm Password" required autocomplete="password_confirmation">
+            @error('password_confirmation')
+            <div class="error-message">{{ $message }}</div>
+            @enderror
+
+            <button type="submit" >Sign Up</button>
         </form>
     </div>
+    {{-- sign up form end--}}
 
+    {{-- sign in form start--}}
     <div class="form-container sign-in">
-        <form>
-            <h1>Sign In</h1>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <h1>{{ __('Sign In') }}</h1>
             <div class="social-icons">
                 <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
                 <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
             </div>
-            <span>or use your email for sign-in</span>
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <a href="#">Forget Your Password?</a>
-            <button>Sign In</button>
+            <span>{{ __('or use your email for sign-in') }}</span>
+
+            <input type="email" name="email" placeholder="Email">
+            @error('email')
+            <div class="error-message">{{ $message }}</div>  <
+            @enderror
+            <input type="password" name="password" placeholder="Password">
+            @error('password')
+            <div class="error-message">{{ $message }}</div>  <
+            @enderror
+            <a href="#">{{ __('Forget Your Password?') }}</a>
+            <button type="submit">{{ __('Sign In') }}</button>
         </form>
     </div>
     <div class="toggle-container">
