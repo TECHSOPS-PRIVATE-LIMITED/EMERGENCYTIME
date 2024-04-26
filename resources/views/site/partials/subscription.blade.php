@@ -30,7 +30,11 @@
                                 <li><em class="ti ti-close"></em>First Aid Tips</li>
                                 <li><em class="ti ti-close"></em>Appointment Reminders</li>
                             </ul>
-                            <a href="Sign-up/sign-up.html" class="button button-uppercase"> Sign Up</a>
+                            @if(Auth::check())
+                                <a href="{{ route('stripe') }}" class="button button-uppercase">{{ __('Buy Subscription') }}</a>
+                            @else
+                                <a href="{{ route('login') }}" class="button button-uppercase">{{ __('Login to Buy') }}</a>
+                            @endif
                         </div>
                     </div>
                 </div><!-- .col  -->
@@ -50,7 +54,11 @@
                                 <li><em class="ti ti-check"></em>First Aid Tips</li>
                                 <li><em class="ti ti-check"></em>Appointment Reminders</li>
                             </ul>
-                            <a href="Sign-up/sign-up.html" class="button button-uppercase"> Sign Up</a>
+                            @if(Auth::check())
+                                <a href="{{ route('stripe') }}" class="button button-uppercase">{{ __('Buy Subscription') }}</a>
+                            @else
+                                <a href="{{ route('login') }}" class="button button-uppercase">{{ __('Login to Buy') }}</a>
+                            @endif
                         </div>
                     </div>
                 </div><!-- .col  -->

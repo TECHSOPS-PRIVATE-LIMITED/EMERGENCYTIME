@@ -16,22 +16,29 @@ use App\Http\Controllers\ComponentsController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\GeneralSettingController;
+use App\Http\Controllers\StripePaymentController;
 
 require __DIR__ . '/auth.php';
-//
+
 //Route::get('/', function () {
 //    return to_route('login');
 //});
 
-Route::group(['middleware' => ['auth']],function () {
 
-    Route::get('/', function () {
-        return view('site.site');
-    });
-
+Route::get('/', function () {
+    return view('site.site');
 });
 
-Route::group(['prefix' =>'admin','middleware' => ['auth', 'verified']], function () {
+//Route::group(['middleware' => ['auth']], function () {
+
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('stripe', 'stripe')->name('stripe');;
+    Route::post('stripe', 'stripePost')->name('stripe.post');
+});
+
+//});
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
     // Dashboards
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard.index');
     // Locale
