@@ -13,7 +13,7 @@ class PermissionSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $permissions = collect([
             ['name' => 'user create', 'module_name' => 'user',],
@@ -44,6 +44,42 @@ class PermissionSeeder extends Seeder
             ['name'=>'menu role_permission_permissions', 'module_name'=>'menu'],
             ['name'=>'menu role_permission_roles', 'module_name'=>'menu'],
             ['name'=>'menu database_backup', 'module_name'=>'menu'],
+
+            ['name' => 'facility index', 'module_name' => 'facility'],
+            ['name' => 'facility create', 'module_name' => 'facility'],
+            ['name' => 'facility update', 'module_name' => 'facility'],
+            ['name' => 'facility delete', 'module_name' => 'facility'],
+            ['name' => 'facility show', 'module_name' => 'facility'],
+
+            ['name' => 'equipment index', 'module_name' => 'equipment'],
+            ['name' => 'equipment create', 'module_name' => 'equipment'],
+            ['name' => 'equipment update', 'module_name' => 'equipment'],
+            ['name' => 'equipment delete', 'module_name' => 'equipment'],
+            ['name' => 'equipment show', 'module_name' => 'equipment'],
+
+            ['name' => 'medical_staff index', 'module_name' => 'medical_staff'],
+            ['name' => 'medical_staff create', 'module_name' => 'medical_staff'],
+            ['name' => 'medical_staff update', 'module_name' => 'medical_staff'],
+            ['name' => 'medical_staff delete', 'module_name' => 'medical_staff'],
+            ['name' => 'medical_staff show', 'module_name' => 'medical_staff'],
+
+            ['name' => 'specialty index', 'module_name' => 'specialty'],
+            ['name' => 'specialty create', 'module_name' => 'specialty'],
+            ['name' => 'specialty update', 'module_name' => 'specialty'],
+            ['name' => 'specialty delete', 'module_name' => 'specialty'],
+            ['name' => 'specialty show', 'module_name' => 'specialty'],
+
+            ['name' => 'treatment index', 'module_name' => 'treatment'],
+            ['name' => 'treatment create', 'module_name' => 'treatment'],
+            ['name' => 'treatment update', 'module_name' => 'treatment'],
+            ['name' => 'treatment delete', 'module_name' => 'treatment'],
+            ['name' => 'treatment show', 'module_name' => 'treatment'],
+
+            ['name' => 'subscription index', 'module_name' => 'subscription'],
+            ['name' => 'subscription create', 'module_name' => 'subscription'],
+            ['name' => 'subscription update', 'module_name' => 'subscription'],
+            ['name' => 'subscription delete', 'module_name' => 'subscription'],
+            ['name' => 'subscription show', 'module_name' => 'subscription'],
         ]);
 
         $web = collect([]);

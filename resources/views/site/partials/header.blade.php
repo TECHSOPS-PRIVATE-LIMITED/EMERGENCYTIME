@@ -12,8 +12,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="">
-                        <img class="logo logo-light" src="{{ asset('site/images/logo-white.png') }}" alt="logo" />
-                        <img class="logo logo-color" src="{{ asset('site/images/logo.png') }}" alt="logo" />
+                        <img class="logo logo-light" src="{{ asset('images/logo.png') }}" alt="logo" />
+                        <img class="logo logo-color" src="{{ asset('images/logo.png') }}" alt="logo" />
                     </a>
                 </div>
 

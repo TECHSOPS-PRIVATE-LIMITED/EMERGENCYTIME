@@ -28,7 +28,7 @@ class UserController extends Controller
      * @return Application|Factory|View
      *
      */
-    public function index(Request $request)
+    public function index(Request $request): Factory|View|Application
     {
         $breadcrumbsItems = [
             [
@@ -70,7 +70,7 @@ class UserController extends Controller
      * @return Application|Factory|View
      *
      */
-    public function create()
+    public function create(): Factory|View|Application
     {
         $breadcrumbsItems = [
             [
@@ -100,7 +100,7 @@ class UserController extends Controller
      * @return RedirectResponse
      *
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request): RedirectResponse
     {
         $user = User::create($request->safe(['name', 'email'])
             + [
@@ -119,7 +119,7 @@ class UserController extends Controller
      * @return Application|Factory|View
      *
      */
-    public function show(User $user)
+    public function show(User $user): Factory|View|Application
     {
         $breadcrumbsItems = [
             [
@@ -148,7 +148,7 @@ class UserController extends Controller
      * @return Application|Factory|View
      *
      */
-    public function edit(User $user)
+    public function edit(User $user): Factory|View|Application
     {
         $breadcrumbsItems = [
             [
@@ -181,7 +181,7 @@ class UserController extends Controller
      * @return RedirectResponse
      *
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
         $user->update($request->safe(['name', 'email'])
             + ['password' => bcrypt($request->validated(['password']))]);
@@ -198,7 +198,7 @@ class UserController extends Controller
      * @return RedirectResponse
      *
      */
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
         $user->delete();
 

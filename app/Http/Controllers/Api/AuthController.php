@@ -63,10 +63,12 @@ class AuthController extends Controller
         config(['verify-new-email.route' => null]);
     }
 
-    public function login(LoginRequest $request)
+    /**
+     * @throws ValidationException
+     */
+    public function login(LoginRequest $request): JsonResponse
     {
         $request->authenticate();
-
         $user = Auth::user();
 
         $user['token'] = $user->createToken('main')->plainTextToken;
@@ -81,7 +83,7 @@ class AuthController extends Controller
      * Get the authenticated User.
      * @return JsonResponse
      */
-    public function user()
+    public function user(): JsonResponse
     {
         return $this->responseWithSuccess(
             'User returned successfully',
@@ -89,7 +91,7 @@ class AuthController extends Controller
         );
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         $user = Auth::user();
         // Revoke the token that was used to authenticate the current request...

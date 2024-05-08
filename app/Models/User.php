@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use ProtoneMedia\LaravelVerifyNewEmail\MustVerifyNewEmail;
+use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
@@ -32,9 +35,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'password',
         'email_verified_at',
         'phone',
-        'post_code',
+        'address',
+        'dob',
         'city',
-        'country',
+        'country_id',
         'photo',
     ];
 
@@ -58,6 +62,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     ];
 
 
+    /**
+     * @throws InvalidManipulation
+     */
     public function registerMediaConversions(Media $media = null): void
     {
         $this
@@ -86,5 +93,38 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         return $query->where('id', '!=', 1);
     }
 
+    public function facilities(): HasMany
+    {
+        return $this->hasMany(Facility::class);
+    }
 
+    public function equipments(): HasMany
+    {
+        return $this->hasMany(Equipment::class);
+    }
+
+    public function medicalStaffs(): HasMany
+    {
+        return $this->hasMany(MedicalStaff::class);
+    }
+
+    public function specialities(): HasMany
+    {
+        return $this->hasMany(Specialty::class);
+    }
+
+    public function treatments(): HasMany
+    {
+        return $this->hasMany(Treatment::class);
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function subscription(): HasOne
+    {
+        return $this->hasOne(Subscription::class);
+    }
 }

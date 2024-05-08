@@ -10,7 +10,7 @@
 
 <div class="container">
 
-    <h1>Stripe Payment Gateway </h1>
+    <h1 class="text-center">Stripe Payment Gateway </h1>
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
