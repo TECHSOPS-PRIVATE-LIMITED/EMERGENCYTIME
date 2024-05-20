@@ -16,6 +16,7 @@ use App\Http\Controllers\MedicalStaffController;
 use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\PayPalController;
 
 require __DIR__ . '/auth.php';
 
@@ -30,10 +31,18 @@ Route::get('/', function () {
 
 //Route::group(['middleware' => ['auth']], function () {
 
+// stripe payment
 Route::controller(StripePaymentController::class)->group(function () {
-    Route::get('stripe', 'stripe')->name('stripe');;
+    Route::get('stripe', 'stripe')->name('stripe');
     Route::post('stripe', 'stripePost')->name('stripe.post');
 });
+
+// paypal payment
+Route::get('paypal/subscribe', [PayPalController::class, 'createSubscription'])->name('paypal.subscribe');
+Route::get('paypal/return', [PayPalController::class, 'returnFromPayPal'])->name('paypal.return');
+Route::get('paypal/cancel', [PayPalController::class, 'cancelSubscription'])->name('paypal.cancel');
+
+//<a href="{{ route('paypal.subscribe') }}">Subscribe to Monthly Plan ($10)</a>
 
 //});
 

@@ -10,7 +10,7 @@
 
 <div class="container">
 
-    <h1 class="text-center">Stripe Payment Gateway </h1>
+    <h1>Stripe Payment Gateway </h1>
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -91,7 +91,7 @@
 
 </div>
 
-</body>
+
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
@@ -163,4 +163,5 @@
 
     });
 </script>
+</body>
 </html>
