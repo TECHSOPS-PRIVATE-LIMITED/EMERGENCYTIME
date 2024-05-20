@@ -63,7 +63,7 @@ class RoleController extends Controller
      * @return JsonResponse
      *
      */
-    public function store(StoreRoleRequest $request)
+    public function store(StoreRoleRequest $request): JsonResponse
     {
         $role = Role::create(['name' => $request->validated('name')]);
         $role->syncPermissions($request->validated('permissions'));
@@ -82,7 +82,7 @@ class RoleController extends Controller
      * @return JsonResponse
      *
      */
-    public function show(Role $role)
+    public function show(Role $role): JsonResponse
     {
         $role['modules'] = Permission::all()->groupBy('module_name');
         $role['permissionIds'] = $role->permissions()->pluck('id')->toArray();

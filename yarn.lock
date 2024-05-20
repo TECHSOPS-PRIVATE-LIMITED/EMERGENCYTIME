@@ -575,10 +575,10 @@ jquery-validation@^1.19.5:
   resolved "https://registry.npmjs.org/jquery-validation/-/jquery-validation-1.19.5.tgz"
   integrity sha512-X2SmnPq1mRiDecVYL8edWx+yTBZDyC8ohWXFhXdtqFHgU9Wd4KHkvcbCoIZ0JaSaumzS8s2gXSkP8F7ivg/8ZQ==
 
-"jquery@^1.7 || ^2.0 || ^3.1", jquery@^3.6.4, jquery@>=1.7, jquery@>=1.8.3:
-  version "3.6.4"
-  resolved "https://registry.npmjs.org/jquery/-/jquery-3.6.4.tgz"
-  integrity sha512-v28EW9DWDFpzcD9O5iyJXg3R3+q+mET5JhnjJzQUZMHOv67bpSIHq81GEYpPNZHG+XXHsfSme3nxp/hndKEcsQ==
+"jquery@^1.7 || ^2.0 || ^3.1", jquery@^3.7.1, jquery@>=1.7, jquery@>=1.8.3:
+  version "3.7.1"
+  resolved "https://registry.npmjs.org/jquery/-/jquery-3.7.1.tgz"
+  integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
 
 just-extend@^5.0.0:
   version "5.1.1"

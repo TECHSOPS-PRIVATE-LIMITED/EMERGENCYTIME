@@ -12,8 +12,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="">
-                        <img class="logo logo-light" src="{{ asset('site/images/logo-white.png') }}" alt="logo" />
-                        <img class="logo logo-color" src="{{ asset('site/images/logo.png') }}" alt="logo" />
+                        <img class="logo logo-light" src="{{ asset('images/logo.png') }}" alt="logo" />
+                        <img class="logo logo-color" src="{{ asset('images/logo.png') }}" alt="logo" />
                     </a>
                 </div>
 
@@ -29,12 +29,12 @@
                         <li><a class="nav-item" href="#contacts">Contact Us</a></li>
                         @auth
                             <li>
-                                <a class="nav-item" style="padding: 10px; background-color: black; border-radius: 5px;">
+                                <a class="nav-item" style="padding:10px; background-color:black; color:white; border-radius: 5px;">
                                     {{ \Illuminate\Support\Str::limit(Auth::user()->name, 15, '') }}</a>
                             </li>
                         @else
                             <li>
-                                <a class="nav-item" style="padding: 10px; background-color: black; border-radius: 5px;" href="{{ route('login') }}">
+                                <a class="nav-item" style="padding: 10px; background-color:black; border-radius:5px; color:white;" href="{{ route('login') }}">
                                     {{ __('Register/Login') }}</a>
                             </li>
                         @endauth

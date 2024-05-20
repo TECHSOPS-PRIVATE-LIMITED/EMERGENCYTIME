@@ -27,6 +27,10 @@
 @include('site.partials.about-section')
 <!-- .about-section  -->
 
+<!-- Start .pricing-section  -->
+@include('site.partials.subscription')
+<!-- .pricing-section -->
+
 
 <!-- Start .features-section  -->
 @include('site.partials.feature-section')
@@ -36,12 +40,6 @@
 <!-- Start .screenshots-section  -->
 @include('site.partials.screenshoot-section')
 <!-- .screenshots-section  -->
-
-
-<!-- Start .pricing-section  -->
-@include('site.partials.subscription')
-<!-- .pricing-section -->
-
 
 <!-- Start .faq-section  -->
 @include('site.partials.faq')

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -21,6 +22,14 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'super-admin',
+                'phone' => '1234567890',
+                'address' => '123 Main St',
+                'dob' => '1990-01-01',
+                'city' => 'New York',
+                'photo' => null,
+                'country_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ],
             [
                 'name' => 'Admin',
@@ -28,6 +37,14 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'admin',
+                'phone' => '1234567890',
+                'address' => '123 Main St',
+                'dob' => '1990-01-01',
+                'city' => 'New York',
+                'photo' => null,
+                'country_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ],
             [
                 'name' => 'User',
@@ -35,6 +52,14 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'user',
+                'phone' => '1234567890',
+                'address' => '123 Main St',
+                'dob' => '1990-01-01',
+                'city' => 'New York',
+                'photo' => null,
+                'country_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ],
         ]);
 
