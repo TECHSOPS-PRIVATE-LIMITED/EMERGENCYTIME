@@ -115,11 +115,11 @@
                                         </td>
 
                                         <td class="table-td">
-                                            {{ $specialty->created_at->diffForHumans() ?? 'N/A' }}
+                                            {{ $subscription->created_at ? $subscription->created_at->diffForHumans() : 'N/A' }}
                                         </td>
 
                                         <td class="table-td">
-                                            {{ $specialty->canceled_at->diffForHumans() ?? 'N/A' }}
+                                            {{ $subscription->canceled_at->diffForHumans() ?? 'N/A' }}
                                         </td>
 
                                         <td class="table-td">
