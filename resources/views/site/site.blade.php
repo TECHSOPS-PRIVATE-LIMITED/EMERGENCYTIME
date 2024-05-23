@@ -68,7 +68,7 @@
 <!-- Google Map Script -->
 {{--<script src="https://maps.google.com/maps/api/js?key=AIzaSyD6cxB4idvB67_Mz1ScQn-_nBJmltUaS-g"></script>--}}
 {{--<script src="{{ asset('site/assets/js/googleMap.js') }}"></script>--}}
-
+Hello
 <!-- JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
