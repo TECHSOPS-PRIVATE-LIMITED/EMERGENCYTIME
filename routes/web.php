@@ -17,6 +17,8 @@ use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\AssignToFacilityController;
+use App\Http\Controllers\CategoryController;
 
 require __DIR__ . '/auth.php';
 
@@ -91,4 +93,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
 
     // Subscription
     Route::resource('subscriptions',SubscriptionController::class);
+
+    // Category
+    Route::resource('categories', CategoryController::class);
+
+    //Assign to hospitals
+    Route::get('assign-to-facility', [AssignToFacilityController::class, 'index'])->name('assign.to.facility.index');
+    Route::post('assign-to-facility', [AssignToFacilityController::class, 'store'])->name('assign.to.facility.store');
 });

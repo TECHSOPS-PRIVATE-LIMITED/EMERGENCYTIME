@@ -36,6 +36,7 @@ class AuthUserResource extends JsonResource
             'permissions' => $role ? $role->permissions->pluck('name') : [], // Permissions, if available
             'is_pending_email' => !is_null($this->getPendingEmail()),
             'pending_email' => $this->getPendingEmail(),
+            'token' => $this->token,
         ];
     }
 }

@@ -25,7 +25,8 @@ class StoreMedicalStaffRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100|unique:medical_staff,name',
-            'role' => 'required|string|max:50|unique:medical_staff,role',
+            'role' => 'required|string|max:50',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:10240',
             'description' => 'nullable|string',
             'facility_id' => 'nullable|exists:facilities,id',
         ];

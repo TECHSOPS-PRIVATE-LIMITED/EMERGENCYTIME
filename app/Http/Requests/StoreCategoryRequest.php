@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateMedicalStaffRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +24,9 @@ class UpdateMedicalStaffRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:100|unique:medical_staff,name,', Rule::unique('equipments', 'name')->ignore($this->medicalStaff),
-            'role' => 'required|string|max:50',
-            'description' => 'nullable|string',
-            'facility_id' => 'nullable|exists:facilities,id',
-            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:10240',
+            'name' => 'required|string|max:255|unique:categories,name',
+            'image' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:5120',
+            'description' => 'nullable|string|max:255',
         ];
     }
 }

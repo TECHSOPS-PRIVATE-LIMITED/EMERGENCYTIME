@@ -29,7 +29,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
+     * @return UserCollection
      */
     public function index(Request $request)
     {

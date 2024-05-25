@@ -80,6 +80,13 @@ class PermissionSeeder extends Seeder
             ['name' => 'subscription update', 'module_name' => 'subscription'],
             ['name' => 'subscription delete', 'module_name' => 'subscription'],
             ['name' => 'subscription show', 'module_name' => 'subscription'],
+
+            ['name' => 'category index', 'module_name' => 'category'],
+            ['name' => 'category create', 'module_name' => 'category'],
+            ['name' => 'category update', 'module_name' => 'category'],
+            ['name' => 'category delete', 'module_name' => 'category'],
+            ['name' => 'category show', 'module_name' => 'category'],
+
         ]);
 
         $web = collect([]);

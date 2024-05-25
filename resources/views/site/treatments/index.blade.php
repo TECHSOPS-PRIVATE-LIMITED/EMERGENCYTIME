@@ -77,7 +77,7 @@
                                         </td>
 
                                         <td class="table-td">
-                                            {{ $treatment->category_name }}
+                                            {{ $treatment->category->name }}
                                         </td>
 
                                         <td class="table-td">

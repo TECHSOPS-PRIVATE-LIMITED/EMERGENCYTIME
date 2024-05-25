@@ -11,19 +11,18 @@
         @endif
         {{--Alert end--}}
 
-
         <div class="card">
             <header class="card-header noborder">
                 <div class="justify-end flex gap-3 items-center flex-wrap">
                     {{-- Create Button start--}}
-{{--                    @can('subscription create')--}}
-{{--                    <a class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2 !px-3"--}}
-{{--                       href="{{ route('subscriptions.create') }}">--}}
-{{--                        <iconify-icon icon="ic:round-plus" class="text-lg mr-1">--}}
-{{--                        </iconify-icon>--}}
-{{--                        {{ __('New') }}--}}
-{{--                    </a>--}}
-{{--                    @endcan--}}
+                    {{--                    @can('subscription create')--}}
+                    {{--                    <a class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2 !px-3"--}}
+                    {{--                       href="{{ route('subscriptions.create') }}">--}}
+                    {{--                        <iconify-icon icon="ic:round-plus" class="text-lg mr-1">--}}
+                    {{--                        </iconify-icon>--}}
+                    {{--                        {{ __('New') }}--}}
+                    {{--                    </a>--}}
+                    {{--                    @endcan--}}
                     {{--Refresh Button start--}}
                     <a class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2.5"
                        href="{{ route('subscriptions.index') }}">
@@ -103,7 +102,15 @@
                                         </td>
 
                                         <td class="table-td">
+                                            @if($subscription->status == 'active')
+                                                <span class="badge bg-success-500 text-white capitalize rounded-3xl">
                                             {{ $subscription->status }}
+                                                </span>
+                                            @else
+                                                <span class="badge bg-danger-500 text-white capitalize rounded-3xl">
+                                            {{ $subscription->status }}
+                                                </span>
+                                            @endif
                                         </td>
 
                                         <td class="table-td">
@@ -115,11 +122,11 @@
                                         </td>
 
                                         <td class="table-td">
-                                            {{ $specialty->created_at->diffForHumans() ?? 'N/A' }}
+                                            {{ $subscription->created_at->diffForHumans() ?? 'N/A' }}
                                         </td>
 
                                         <td class="table-td">
-                                            {{ $specialty->canceled_at->diffForHumans() ?? 'N/A' }}
+                                            {{ $subscription->canceled_at ? $subscription->canceled_at->diffForHumans() : 'N/A' }}
                                         </td>
 
                                         <td class="table-td">
@@ -133,26 +140,26 @@
                                                 @endcan
 
                                                 {{-- Edit--}}
-{{--                                                @can('subscription update')--}}
-{{--                                                    <a class="action-btn"--}}
-{{--                                                       href="{{ route('subscriptions.edit',$specialty) }}">--}}
-{{--                                                        <iconify-icon icon="heroicons:pencil-square"></iconify-icon>--}}
-{{--                                                    </a>--}}
-{{--                                                @endcan--}}
+                                                {{--                                                @can('subscription update')--}}
+                                                {{--                                                    <a class="action-btn"--}}
+                                                {{--                                                       href="{{ route('subscriptions.edit',$specialty) }}">--}}
+                                                {{--                                                        <iconify-icon icon="heroicons:pencil-square"></iconify-icon>--}}
+                                                {{--                                                    </a>--}}
+                                                {{--                                                @endcan--}}
 
                                                 {{--  delete--}}
-{{--                                                @can('subscription delete')--}}
-{{--                                                    <form id="deleteForm{{ $specialty->id }}" method="POST"--}}
-{{--                                                          action="{{ route('specialties.destroy', $specialty) }}">--}}
-{{--                                                        @csrf--}}
-{{--                                                        @method('DELETE')--}}
-{{--                                                        <a class="action-btn cursor-pointer"--}}
-{{--                                                           onclick="sweetAlertDelete(event, 'deleteForm{{ $specialty->id }}')"--}}
-{{--                                                           type="submit">--}}
-{{--                                                            <iconify-icon icon="heroicons:trash"></iconify-icon>--}}
-{{--                                                        </a>--}}
-{{--                                                    </form>--}}
-{{--                                                @endcan--}}
+                                                {{--                                                @can('subscription delete')--}}
+                                                {{--                                                    <form id="deleteForm{{ $specialty->id }}" method="POST"--}}
+                                                {{--                                                          action="{{ route('specialties.destroy', $specialty) }}">--}}
+                                                {{--                                                        @csrf--}}
+                                                {{--                                                        @method('DELETE')--}}
+                                                {{--                                                        <a class="action-btn cursor-pointer"--}}
+                                                {{--                                                           onclick="sweetAlertDelete(event, 'deleteForm{{ $specialty->id }}')"--}}
+                                                {{--                                                           type="submit">--}}
+                                                {{--                                                            <iconify-icon icon="heroicons:trash"></iconify-icon>--}}
+                                                {{--                                                        </a>--}}
+                                                {{--                                                    </form>--}}
+                                                {{--                                                @endcan--}}
                                             </div>
                                         </td>
                                     </tr>

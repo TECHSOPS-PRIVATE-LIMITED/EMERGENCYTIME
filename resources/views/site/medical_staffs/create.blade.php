@@ -30,7 +30,7 @@
                             {{-- role start --}}
                             <div class="input-area">
                                 <label for="role"
-                                       class="form-label">{{ __('Role') }}</label>
+                                       class="form-label">{{ __('Role') }}<span class="text-red-500">*</span></label>
                                 <div class="relative">
                                     <input type="text" id="role" name="role"
                                            class="form-control"

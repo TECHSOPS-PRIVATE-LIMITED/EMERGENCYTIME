@@ -14,11 +14,18 @@ return new class extends Migration {
     {
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
-            $table->string('category_name', 255)->unique();
             $table->string('disease_name', 255)->unique();
+            $table->foreignId('category_id')
+                ->constrained()
+                ->cascadeOnDelete();
             $table->tinyText('description')->nullable();
-            $table->foreignId('user_id')->constrained('users')
-                  ->cascadeOnDelete();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->tinyText('precautions')->nullable();
+            $table->tinyText('symptoms')->nullable();
+            $table->tinyText('medications')->nullable();
+            $table->tinyText('procedures')->nullable();
             $table->timestamps();
         });
     }

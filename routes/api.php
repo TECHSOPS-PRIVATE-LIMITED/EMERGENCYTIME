@@ -1,14 +1,15 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DatabaseBackupController;
+use App\Http\Controllers\Api\EnvironmentController;
 use App\Http\Controllers\Api\GeneralSettingsController;
 use App\Http\Controllers\Api\GeneralSettingsMediaController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\TreatmentApiController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\EnvironmentController;
-use App\Http\Controllers\Api\DatabaseBackupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +46,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::apiResource('database-backups', DatabaseBackupController::class)->only(['index', 'destroy']);
         Route::get('database-backups-create', [DatabaseBackupController::class,'createBackup']);
         Route::get('database-backups-download/{fileName}', [DatabaseBackupController::class, 'databaseBackupDownload']);
+
+        //treatments
+        Route::get('/treatments', [TreatmentApiController::class, 'index']);
+        Route::get('/treatments/{id}', [TreatmentApiController::class, 'show']);
+
     });
 });
 

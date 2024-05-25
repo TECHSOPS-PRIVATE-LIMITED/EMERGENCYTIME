@@ -24,9 +24,13 @@ class StoreTreatmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_name' => 'required|string|min:2|max:255|unique:treatments,category_name',
+            'category_id' => 'required|exists:categories,id',
             'disease_name' => 'required|string|min:2|max:255|unique:treatments,disease_name',
             'description' => 'nullable|string|max:500',
+            'precautions' => 'nullable|string|max:1000',
+            'symptoms' => 'nullable|string|max:1000',
+            'medications' => 'nullable|string|max:1000',
+            'procedures' => 'nullable|string|max:1000',
         ];
     }
 }

@@ -12,21 +12,29 @@ class Treatment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_name',
+        'category_id',
         'disease_name',
         'description',
-        'user_id'
-    ];
+        'user_id',
+        'precautions',
+        'symptoms',
+        'medications',
+        'procedures'
+        ];
 
-    // facility
     public function facilities(): BelongsToMany
     {
         return $this->belongsToMany(Facility::class, 'facility_treatment', 'treatment_id', 'facility_id');
     }
 
-    //user
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
+
+    public function category() : BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }

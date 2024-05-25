@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTreatmentRequest;
 use App\Http\Requests\UpdateTreatmentRequest;
+use App\Models\Category;
 use App\Models\Treatment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,8 +39,7 @@ class TreatmentController extends Controller
         $perPage = $request->get('per_page', 10);
 
         $treatments = QueryBuilder::for(Treatment::class)
-            ->allowedSorts(['category_name', 'disease_name', 'description', 'created_at'])
-            ->where('category_name', 'like', "%$q%")
+            ->allowedSorts(['disease_name', 'description', 'created_at'])
             ->orWhere('disease_name', 'like', "%$q%")
             ->orWhere('description', 'like', "%$q%")
             ->orWhere('created_at', 'like', "%$q%")
@@ -72,9 +72,10 @@ class TreatmentController extends Controller
                 'active' => true,
             ],
         ];
-
+        $categories = Category::all();
         return view('site.treatments.create', [
             'breadcrumbItems' => $breadcrumbsItems,
+            'categories' => $categories,
             'pageTitle' => 'Create Treatment',
         ]);
     }
@@ -117,7 +118,7 @@ class TreatmentController extends Controller
 
         return view('site.treatments.show', [
             'breadcrumbItems' => $breadcrumbsItems,
-            'treatment' => $treatment,
+            'treatment' => $treatment->load('category'),
             'pageTitle' => 'Show Treatment',
         ]);
     }
@@ -143,9 +144,11 @@ class TreatmentController extends Controller
             ],
         ];
 
+        $categories = Category::all();
         return view('site.treatments.edit', [
             'breadcrumbItems' => $breadcrumbsItems,
             'treatment' => $treatment,
+            'categories' => $categories,
             'pageTitle' => 'Edit Treatment',
         ]);
     }

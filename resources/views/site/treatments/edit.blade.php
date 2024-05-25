@@ -16,41 +16,87 @@
                         @method('PUT')
                         <div class="grid md:grid-cols-2 gap-6">
 
-                            {{-- category_name start --}}
+                            {{-- Category Name --}}
                             <div class="input-area">
-                                <label for="category_name" class="form-label">{{ __('Category Name') }}<span class="text-red-500">*</span></label>
+                                <label for="category_id" class="form-label">{{ __('Category') }}<span class="text-red-500">*</span></label>
                                 <div class="relative">
-                                    <input type="text" id="category_name" name="category_name" class="form-control"
-                                           placeholder="Enter Category Name e.g: Bone"
-                                           value="{{ old('category_name', $treatment->category_name) }}" required>
-                                    <x-input-error :messages="$errors->get('category_name')" class="mt-2"/>
+                                    <select id="category_id" name="category_id" class="form-control" required>
+                                        <option value="" disabled selected>Select a category</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <x-input-error :messages="$errors->get('category_id')" class="mt-2"/>
                                 </div>
                             </div>
-                            {{-- category_name end --}}
+                            {{-- Category Name --}}
 
-                            {{-- disease_name start --}}
+                            {{-- Disease Name --}}
                             <div class="input-area">
                                 <label for="disease_name" class="form-label">{{ __('Disease Name') }}<span class="text-red-500">*</span></label>
                                 <div class="relative">
                                     <input type="text" id="disease_name" name="disease_name" class="form-control"
-                                           placeholder="Enter Disease Name"
-                                           value="{{ old('disease_name', $treatment->disease_name) }}" required>
+                                           placeholder="Enter disease name"
+                                           value="{{ old('disease_name', $treatment->disease_name ?? 'N/A') }}" >
                                     <x-input-error :messages="$errors->get('disease_name')" class="mt-2"/>
                                 </div>
                             </div>
-                            {{-- disease_name end --}}
 
-                            {{-- description start --}}
+                            {{-- Description --}}
                             <div class="input-area">
                                 <label for="description" class="form-label">{{ __('Description') }}</label>
                                 <div class="relative">
-                                        <textarea type="text" id="description" name="description" class="form-control"
-                                                  placeholder="Enter equipment description"
-                                        >{{ old('description', $treatment->description?? 'N/A') }}</textarea>
+                                    <textarea id="description" name="description" class="form-control"
+                                              placeholder="Enter description"
+                                              >{{ old('description', $treatment->description ?? 'N/A') }}</textarea>
                                     <x-input-error :messages="$errors->get('description')" class="mt-2"/>
                                 </div>
                             </div>
-                            {{--  description end --}}
+
+                            {{-- Precautions --}}
+                            <div class="input-area">
+                                <label for="precautions" class="form-label">{{ __('Precautions') }}</label>
+                                <div class="relative">
+                                    <textarea id="precautions" name="precautions" class="form-control"
+                                              placeholder="Enter precautions"
+                                              >{{ old('precautions', $treatment->precautions ?? 'N/A') }}</textarea>
+                                    <x-input-error :messages="$errors->get('precautions')" class="mt-2"/>
+                                </div>
+                            </div>
+
+                            {{-- Symptoms --}}
+                            <div class="input-area">
+                                <label for="symptoms" class="form-label">{{ __('Symptoms') }}</label>
+                                <div class="relative">
+                                    <textarea id="symptoms" name="symptoms" class="form-control"
+                                              placeholder="Enter symptoms"
+                                              >{{ old('symptoms', $treatment->symptoms ?? 'N/A') }}</textarea>
+                                    <x-input-error :messages="$errors->get('symptoms')" class="mt-2"/>
+                                </div>
+                            </div>
+
+                            {{-- Medications --}}
+                            <div class="input-area">
+                                <label for="medications" class="form-label">{{ __('Medications') }}</label>
+                                <div class="relative">
+                                    <textarea id="medications" name="medications" class="form-control"
+                                              placeholder="Enter medications"
+                                              >{{ old('medications', $treatment->medications ?? 'N/A') }}</textarea>
+                                    <x-input-error :messages="$errors->get('medications')" class="mt-2"/>
+                                </div>
+                            </div>
+
+                            {{-- Procedures --}}
+                            <div class="input-area">
+                                <label for="procedures" class="form-label">{{ __('Procedures') }}</label>
+                                <div class="relative">
+                                    <textarea id="procedures" name="procedures" class="form-control"
+                                              placeholder="Enter procedures"
+                                              >{{ old('procedures', $treatment->procedures ?? 'N/A') }}</textarea>
+                                    <x-input-error :messages="$errors->get('procedures')" class="mt-2"/>
+                                </div>
+                            </div>
+
                         </div>
                         <button class="btn flex justify-center btn-dark ml-auto">{{ __('Update') }}</button>
                     </form>

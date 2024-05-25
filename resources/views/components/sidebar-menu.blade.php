@@ -85,6 +85,21 @@
             {{-- specialty end --}}
 
             {{-- treatment start --}}
+            @can('category index')
+                <li>
+                    <a href="{{ route('categories.index') }}"
+                       class="navItem {{ (request()->is('categories*')) ? 'active' : '' }}">
+                    <span class="flex items-center">
+                        <iconify-icon class="nav-icon" icon="iconamoon:category-thin" width="1.2rem" height="1.2rem"></iconify-icon>
+                        <span>{{ __('Category') }}</span>
+                    </span>
+                    </a>
+                </li>
+            @endcan
+            {{-- treatment end --}}
+
+
+            {{-- treatment start --}}
             @can('treatment index')
                 <li>
                     <a href="{{ route('treatments.index') }}"
@@ -113,7 +128,19 @@
             @endcan
             {{-- subscription end --}}
 
-            <!-- Database -->
+            {{-- attach hospitals --}}
+            <li>
+                <a href="{{ route('assign.to.facility.index') }}"
+                   class="navItem {{ (request()->is('assign-to-facility*')) ? 'active' : '' }}">
+                    <span class="flex items-center">
+                        <iconify-icon class="nav-icon" icon="vaadin:hospital"></iconify-icon>
+                        <span>{{ __('Assign To Hospitals') }}</span>
+                    </span>
+                </a>
+            </li>
+            {{-- attach hospitals end --}}
+
+{{-- Database --}}
             <li>
                 <a href="{{ route('database-backups.index') }}"
                    class="navItem {{ (request()->is('database-backups*')) ? 'active' : '' }}">
