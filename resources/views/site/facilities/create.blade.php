@@ -173,6 +173,22 @@
                                     <x-input-error :messages="$errors->get('address')" class="mt-2"/>
                                 </div>
 
+                                {{-- longitude --}}
+                                <div class="input-area">
+                                    <label for="longitude" class="form-label">{{ __('Longitude') }}<span class="text-red-500">*</span></label>
+                                    <input type="text" id="longitude" name="longitude" class="form-control"
+                                              placeholder="Enter longitude" >{{ old('longitude') }}
+                                    <x-input-error :messages="$errors->get('longitude')" class="mt-2"/>
+                                </div>
+
+                                {{-- latitude --}}
+                                <div class="input-area">
+                                    <label for="latitude" class="form-label">{{ __('Latitude') }}</label>
+                                    <input id="latitude" name="latitude" type="text" class="form-control"
+                                           placeholder="Enter latitude " value="{{ old('latitude') }}">
+                                    <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
+                                </div>
+
                             </div>
                         </div>
                         {{-- end of facility --}}

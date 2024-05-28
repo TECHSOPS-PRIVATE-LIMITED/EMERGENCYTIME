@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMedicalStaffRequest;
 use App\Http\Requests\UpdateMedicalStaffRequest;
 use App\Models\MedicalStaff;
+use App\Models\Facility;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,9 +40,8 @@ class MedicalStaffController extends Controller
         $sort = $request->get('sort');
 
         $medicalstaffs = QueryBuilder::for(MedicalStaff::class)
-            ->allowedSorts(['name', 'role'])
+            ->allowedSorts(['name'])
             ->where('name', 'like', "%$q%")
-            ->orWhere('role', 'like', "%$q%")
             ->latest()
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
@@ -72,9 +72,10 @@ class MedicalStaffController extends Controller
                 'active' => true
             ],
         ];
-
+        $facilities = Facility::all();
         return view('site.medical_staffs.create', [
             'breadcrumbItems' => $breadcrumbsItems,
+            'facilities' => $facilities,
             'pageTitle' => 'Create Medical Staff',
         ]);
     }
@@ -87,6 +88,7 @@ class MedicalStaffController extends Controller
      */
     public function store(StoreMedicalStaffRequest $request): RedirectResponse
     {
+
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
 
@@ -148,9 +150,12 @@ class MedicalStaffController extends Controller
                 'active' => true
             ]
         ];
+
+        $facilities = Facility::all();
         return view('site.medical_staffs.edit', [
             'breadcrumbItems' => $breadcrumbsItems,
             'medicalStaff' => $medicalStaff,
+            'facilities' => $facilities,
             'pageTitle' => 'Edit Medical Staff'
         ]);
     }
@@ -197,7 +202,12 @@ class MedicalStaffController extends Controller
      */
     public function destroy(MedicalStaff $medicalStaff): RedirectResponse
     {
+        if ($medicalStaff->image) {
+            $imagePath = str_replace('storage', 'public', $medicalStaff->image);
+            Storage::delete($imagePath);
+        }
         $medicalStaff->delete();
+
         return redirect()->route('medical_staffs.index')->with('message', 'Medical Staff deleted successfully.');
     }
 }

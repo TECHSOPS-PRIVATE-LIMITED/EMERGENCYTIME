@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DatabaseBackupController;
 use App\Http\Controllers\Api\EnvironmentController;
+use App\Http\Controllers\Api\FacilityApiController;
 use App\Http\Controllers\Api\GeneralSettingsController;
 use App\Http\Controllers\Api\GeneralSettingsMediaController;
 use App\Http\Controllers\Api\PermissionController;
@@ -50,6 +51,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         //treatments
         Route::get('/treatments', [TreatmentApiController::class, 'index']);
         Route::get('/treatments/{id}', [TreatmentApiController::class, 'show']);
+
+        //facility
+        Route::get('/facilities', [FacilityApiController::class, 'index']);
+        Route::get('/facilities/{id}', [FacilityApiController::class, 'show']);
 
     });
 });

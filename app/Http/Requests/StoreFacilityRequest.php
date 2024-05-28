@@ -29,7 +29,7 @@ class StoreFacilityRequest extends FormRequest
             'type' => 'required|in:hospital,clinic,consultancy,daycare,lab,diagnostic',
             'email' => 'required|email|max:255|unique:facilities,email',
             'country_id' => 'required|exists:countries,id',
-            'phone_number' => 'required|string|regex:/^\d{10}$/',
+            'phone' => 'required|string|regex:/^[0-9\-\s\(\)]{10,15}$/',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:60',
             'state' => 'required|string|max:60',
@@ -40,8 +40,8 @@ class StoreFacilityRequest extends FormRequest
             'closing_hours' => 'nullable|string|max:100',
             'emergency_contact' => 'nullable|string|regex:/^\d{11,15}$/',
             'website' => 'nullable|url|max:255',
-            'longitude' => 'nullable|numeric',
-            'latitude' => 'nullable|numeric',
+            'longitude' => 'required|numeric|between:-180,180',
+            'latitude' => 'required|numeric|between:-90,90',
         ];
     }
 }

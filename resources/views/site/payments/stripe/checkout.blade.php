@@ -3,7 +3,8 @@
 <head>
     <title>Emergency Time - Stripe Payment Gateway Integration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="{{ asset('site/assets/js/jquery.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="{{ asset('site/assets/js/jquery.js') }}"></script> --}}
 
 </head>
 <body>

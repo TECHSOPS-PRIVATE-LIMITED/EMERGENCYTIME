@@ -57,7 +57,7 @@
                                         {{ __('Name') }}
                                     </th>
                                     <th scope="col" class="table-th ">
-                                        {{ __('Role') }}
+                                        {{ __('Email') }}
                                     </th>
                                     <th scope="col" class="table-th ">
                                         {{ __('Description') }}
@@ -81,11 +81,11 @@
                                             # {{ $medicalstaff->id }}
                                         </td>
                                         <td class="table-td">
-                                            {{ $medicalstaff->name }}
+                                            {{ Str::limit($medicalstaff->name,20) }}
                                         </td>
 
                                         <td class="table-td">
-                                            {{ $medicalstaff->role }}
+                                            {{ Str::limit($medicalstaff->email,25) }}
                                         </td>
 
                                         <td class="table-td">

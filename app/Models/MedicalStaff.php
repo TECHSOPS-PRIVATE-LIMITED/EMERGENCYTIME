@@ -13,8 +13,13 @@ class MedicalStaff extends Model
 
     protected $fillable = [
         'name',
-        'role',
-        'specialties',
+       'email',
+       'medical_license_number',
+       'gender',
+       'current_employment',
+       'dob',
+       'address',
+       'phone',
         'description',
         'facility_id',
         'image',
