@@ -24,12 +24,35 @@ class UpdateMedicalStaffRequest extends FormRequest
      */
     public function rules(): array
     {
+        $medicalStaffId = $this->route('medical_staff');
+
         return [
-            'name' => 'required|string|max:100|unique:medical_staff,name,', Rule::unique('equipments', 'name')->ignore($this->medicalStaff),
-            'role' => 'required|string|max:50',
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('medical_staff')->ignore($medicalStaffId),
+            ],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('medical_staff')->ignore($medicalStaffId),
+            ],
+            'medical_license_number' => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique('medical_staff')->ignore($medicalStaffId),
+            ],
+            'gender' => 'required|in:male,female,other',
+            'current_employment' => 'required|in:yes,no',
+            'dob' => 'required|date',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|regex:/^[0-9\-\s\(\)]{10,15}$/',
+            'image' => 'nullable|image|max:5120',
             'description' => 'nullable|string',
             'facility_id' => 'nullable|exists:facilities,id',
-            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:10240',
         ];
     }
 }
