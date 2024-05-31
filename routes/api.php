@@ -51,10 +51,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/facilities', [FacilityApiController::class, 'index']);
         Route::get('/facilities/{id}', [FacilityApiController::class, 'show']);
 
+        // Profile
+        Route::post('profile', [ProfileApiController::class,'update']);
+
     });
 });
 
-Route::middleware('auth:sanctum')->post('profile', [ProfileApiController::class,'update']);
 
 // General Settings
 Route::get('general-settings', GeneralSettingsController::class);
