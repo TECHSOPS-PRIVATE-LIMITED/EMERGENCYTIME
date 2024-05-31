@@ -24,8 +24,7 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users,email,' . auth()->id()],
+            'name' => ['sometimes', 'string', 'max:50'],
             'phone' => ['nullable', 'string', 'max:15'],
             'city' => ['nullable', 'string', 'max:255'],
             'country_id' => ['nullable', 'exists:countries,id'],

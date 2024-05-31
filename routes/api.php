@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\FacilityApiController;
 use App\Http\Controllers\Api\GeneralSettingsController;
 use App\Http\Controllers\Api\GeneralSettingsMediaController;
 use App\Http\Controllers\Api\PermissionController;
-use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\ProfileApiController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TreatmentApiController;
 use App\Http\Controllers\Api\UserController;
@@ -23,10 +23,6 @@ Route::post('login-oauth', [AuthController::class, 'social']);
 
 Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
 
-// Verify new email after change
-Route::get('profile-verify-new-email/{token}',
-    [ProfileController::class, 'verifyNewEmail'])->name('profile.verify-new-email');
-
 // authenticated routes
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('resend-verification', [AuthController::class, 'resendVerification'])
@@ -41,7 +37,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('users-delete-many', [UserController::class, 'destroyMany']);
         Route::apiResource('permissions', PermissionController::class);
         Route::resource('roles', RoleController::class)->except('edit');
-        Route::apiSingleton('profile', ProfileController::class);
         Route::put('general-settings-images', GeneralSettingsMediaController::class);
         // Database Backup
         Route::apiResource('database-backups', DatabaseBackupController::class)->only(['index', 'destroy']);
@@ -58,6 +53,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     });
 });
+
+Route::middleware('auth:sanctum')->post('profile', [ProfileApiController::class,'update']);
 
 // General Settings
 Route::get('general-settings', GeneralSettingsController::class);

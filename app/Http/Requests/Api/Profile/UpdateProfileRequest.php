@@ -11,7 +11,7 @@ class UpdateProfileRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }
@@ -21,16 +21,14 @@ class UpdateProfileRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules() : array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users,email,'.auth()->id()],
-            'phone' => ['nullable', 'string', 'max:255'],
-            'post_code' => ['nullable', 'string', 'max:255'],
+            'name' => ['sometimes', 'string', 'max:50'],
+            'phone' => ['nullable', 'string', 'max:15'],
             'city' => ['nullable', 'string', 'max:255'],
-            'country' => ['nullable', 'string', 'max:255'],
-            'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'country_id' => ['nullable', 'exists:countries,id'],
+            'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120'],
         ];
     }
 }

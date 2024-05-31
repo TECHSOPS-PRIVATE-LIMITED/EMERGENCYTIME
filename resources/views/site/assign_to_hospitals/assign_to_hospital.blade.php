@@ -1,11 +1,11 @@
 <x-app-layout>
     <div>
-        {{--Breadcrumb start--}}
+        {{-- Breadcrumb start --}}
         <div class="mb-6">
-            {{--BreadCrumb--}}
-            <x-breadcrumb :breadcrumb-items="$breadcrumbItems" :page-title="$pageTitle"/>
+            {{-- BreadCrumb --}}
+            <x-breadcrumb :breadcrumb-items="$breadcrumbItems" :page-title="$pageTitle" />
         </div>
-        {{--Breadcrumb end--}}
+        {{-- Breadcrumb end --}}
 
         {{-- BEGIN: Step Form Horizontal --}}
         <div class="space-y-6">
@@ -17,12 +17,13 @@
                     <div class="wizard-steps flex z-[5] items-center relative justify-center md:mx-8">
 
                         <div class="  active pass  relative z-[1] items-center item flex flex-start flex-1
-                                last:flex-none group wizard-step" data-step="1">
+                                last:flex-none group wizard-step"
+                            data-step="1">
                             <div class="number-box">
                                 <span class="number"> 1 </span>
                                 <span class="no-icon text-3xl">
-                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                        </span>
+                                    <iconify-icon icon="bx:check-double"></iconify-icon>
+                                </span>
                             </div>
                             <div class="bar-line"></div>
                             <div class="circle-box">
@@ -31,14 +32,15 @@
                         </div>
 
                         <div class="  relative z-[1] items-center item flex flex-start flex-1
-                                last:flex-none group wizard-step" data-step="1">
+                                last:flex-none group wizard-step"
+                            data-step="1">
                             <div class="number-box">
-                            <span class="number">
-                            2
-                        </span>
+                                <span class="number">
+                                    2
+                                </span>
                                 <span class="no-icon text-3xl">
-                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                        </span>
+                                    <iconify-icon icon="bx:check-double"></iconify-icon>
+                                </span>
                             </div>
                             <div class="bar-line"></div>
                             <div class="circle-box">
@@ -47,14 +49,15 @@
                         </div>
 
                         <div class="  relative z-[1] items-center item flex flex-start flex-1
-                                last:flex-none group wizard-step" data-step="1">
+                                last:flex-none group wizard-step"
+                            data-step="1">
                             <div class="number-box">
-                            <span class="number">
-                            3
-                        </span>
+                                <span class="number">
+                                    3
+                                </span>
                                 <span class="no-icon text-3xl">
-                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                        </span>
+                                    <iconify-icon icon="bx:check-double"></iconify-icon>
+                                </span>
                             </div>
                             <div class="bar-line"></div>
                             <div class="circle-box">
@@ -63,172 +66,159 @@
                         </div>
 
                         <div class="  relative z-[1] items-center item flex flex-start flex-1
-                                last:flex-none group wizard-step" data-step="1">
+                                last:flex-none group wizard-step"
+                            data-step="1">
                             <div class="number-box">
-                            <span class="number">
-                            4
-                        </span>
+                                <span class="number">
+                                    4
+                                </span>
                                 <span class="no-icon text-3xl">
-                            <iconify-icon icon="bx:check-double"></iconify-icon>
-                        </span>
+                                    <iconify-icon icon="bx:check-double"></iconify-icon>
+                                </span>
                             </div>
                             <div class="bar-line"></div>
                             <div class="circle-box">
                                 <span class="w-max">Submit</span>
                             </div>
                         </div>
-
                     </div>
                     <form class="wizard-form mt-10" method="POST" action="{{ route('assign.to.facility.store') }}"
-                          enctype="multipart/form-data">
+                        enctype="multipart/form-data">
                         @csrf
                         {{-- start of facility --}}
                         <div class="wizard-form-step active" data-step="1">
                             <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
                                 <div class="lg:col-span-3 md:col-span-2 col-span-1 mt-5">
-                                    <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">{{ __('') }}</h4>
-                                </div>
-
-                                {{-- name --}}
-                                <div class="input-area">
-                                    <label for="name" class="form-label">{{ __('Name') }} <span
-                                            class="text-red-500">*</span></label>
-                                    <input id="name" name="name" type="text" class="form-control"
-                                           placeholder="Enter Facility Name" value="{{ old('name') }}" required>
-                                    <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+                                    <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">{{ __('') }}
+                                    </h4>
                                 </div>
 
                                 {{-- type --}}
                                 <div class="input-area">
-                                    <label for="type" class="form-label">{{ __('Type') }}<span
+                                    <label for="name" class="form-label">{{ __('Name') }} <span
                                             class="text-red-500">*</span></label>
-                                    <select id="type" name="type" class="form-control" required>
-                                        <option value="">{{ __('Select Facility Type') }}</option>
-                                        <option value="hospital">{{ __('Hospital') }}</option>
-                                        <option value="clinic">{{ __('Clinic') }}</option>
-                                        <option value="consultancy">{{ __('Consultancy') }}</option>
-                                        <option value="daycare">{{ __('Daycare') }}</option>
-                                        <option value="lab">{{ __('Lab') }}</option>
-                                        <option value="diagnostic">{{ __('Diagnostic') }}</option>
-                                    </select>
-                                    <x-input-error :messages="$errors->get('type')" class="mt-2"/>
+                                    <input id="name" name="name" type="text" class="form-control"
+                                        placeholder="Enter Facility Name" value="{{ old('name', $facility->name) }}"
+                                        required readonly>
+                                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                                </div>
+
+                                {{-- name --}}
+                                <div class="input-area">
+                                    <label for="name" class="form-label">{{ __('Type') }} <span
+                                            class="text-red-500">*</span></label>
+                                    <input id="type" name="type" type="text" class="form-control"
+                                        placeholder="Enter Type" value="{{ old('name', $facility->type) }}" required readonly>
+                                    <x-input-error :messages="$errors->get('type')" class="mt-2" />
                                 </div>
 
                                 {{-- email --}}
                                 <div class="input-area">
                                     <label for="email" class="form-label">{{ __('Email') }}<span
                                             class="text-red-500">*</span></label>
-                                    <input id="email" type="email" class="form-control" placeholder="Enter Your Email"
-                                           value="{{ old('email') }}" required>
-                                    <x-input-error :messages="$errors->get('email')" class="mt-2"/>
+                                    <input id="email" type="email" class="form-control"
+                                           value="{{ old('email', $facility->email) }}"
+                                        required readonly>
+                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                 </div>
 
-                                {{-- country number --}}
-                                <div class="input-area">
-                                    <label for="country_code" class="form-label">{{ __('Country Code') }}<span
-                                            class="text-red-500">*</span></label>
-                                    <select id="country_code" name="country_code" class="form-control" required>
-                                        @foreach($countries as $country)
-                                            <option
-                                                value="{{ $country->code }}">{{ $country->code }} {{ $country->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                                 {{-- phone number start --}}
                                 <div class="input-area">
                                     <label for="phone_number" class="form-label">{{ __('Phone Number') }}<span
                                             class="text-red-500">*</span></label>
                                     <input id="phone_number" name="phone_number" type="text" class="form-control"
-                                           placeholder="1234567890"
-                                           minlength="10" maxlength="10" value="{{ old('phone_number') }}" required>
-                                    <x-input-error :messages="$errors->get('phone_number')" class="mt-2"/>
+                                        placeholder="1234567890" minlength="10" maxlength="10"
+                                        value="{{ old('phone_number', $facility->phone_number) }}" readonly>
+                                    <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                                 </div>
 
                                 {{--  number_of_beds --}}
                                 <div class="input-area">
                                     <label for="number_of_beds" class="form-label">{{ __('Number of Beds') }}</label>
-                                    <input id="number_of_beds" name="number_of_beds" type="text" class="form-control"
-                                           placeholder="Number of Beds"
-                                           value="{{ old('number_of_beds') }}">
-                                    <x-input-error :messages="$errors->get('number_of_beds')" class="mt-2"/>
+                                    <input id="number_of_beds" name="number_of_beds" type="text"
+                                        class="form-control" placeholder="Number of Beds"
+                                        value="{{ old('number_of_beds', $facility->number_of_beds ?? 'N/A') }}"
+                                        readonly>
+                                    <x-input-error :messages="$errors->get('number_of_beds')" class="mt-2" />
                                 </div>
 
                                 {{--  hipaa_status --}}
                                 <div class="input-area">
                                     <label for="hipaa_status" class="form-label">{{ __('Hipaa Status') }}<span
                                             class="text-red-500">*</span></label>
-                                    <select id="hipaa_status" name="hipaa_status" class="form-control">
-                                        <option value="">{{ __('Select Hippa Status') }}</option>
-                                        <option value="yes">{{ __('Yes') }}</option>
-                                        <option value="no">{{ __('No') }}</option>
-                                    </select>
-                                    <x-input-error :messages="$errors->get('hipaa_status')" class="mt-2"/>
+                                    <input id="hipaa_status" name="hipaa_status" type="text" class="form-control"
+                                        placeholder="1234567890" minlength="10" maxlength="10"
+                                        value="{{ old('hipaa_status', $facility->hipaa_status) }}" readonly>
+                                    <x-input-error :messages="$errors->get('hipaa_status')" class="mt-2" />
                                 </div>
-
 
                                 {{-- city --}}
                                 <div class="input-area">
                                     <label for="city" class="form-label">{{ __('City') }}<span
                                             class="text-red-500">*</span></label>
-                                    <input id="city" name="city" type="text" class="form-control" placeholder="City"
-                                           value="{{ old('city') }}" required>
-                                    <x-input-error :messages="$errors->get('city')" class="mt-2"/>
+                                    <input id="city" name="city" type="text" class="form-control"
+                                        placeholder="City" value="{{ old('city', $facility->city) }}" readonly>
+                                    <x-input-error :messages="$errors->get('city')" class="mt-2" />
                                 </div>
 
                                 {{--  state --}}
                                 <div class="input-area">
                                     <label for="state" class="form-label">{{ __('State') }}<span
                                             class="text-red-500">*</span></label>
-                                    <input id="state" name="state" type="text" class="form-control" placeholder="State"
-                                           value="{{ old('state') }}" required>
-                                    <x-input-error :messages="$errors->get('state')" class="mt-2"/>
-
+                                    <input id="state" name="state" type="text" class="form-control"
+                                        placeholder="State" value="{{ old('state', $facility->state) }}" readonly>
+                                    <x-input-error :messages="$errors->get('state')" class="mt-2" />
                                 </div>
 
-                                {{--  country --}}
+                                {{-- country --}}
                                 <div class="input-area">
-                                    <label for="country_code" class="form-label">{{ __('Country Code') }}<span
+                                    <label for="country_id" class="form-label">{{ __('Country Code') }}<span
                                             class="text-red-500">*</span></label>
-                                    <select id="country_code" name="country_code" class="form-control" required>
-                                        @foreach($countries as $country)
-                                            <option
-                                                value="{{ $country->code }}">{{ $country->code }} {{ $country->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input id="country_id" name="country_id" type="text" class="form-control"
+                                    value="{{ old('country_id', optional($facility->country)->name) }}" readonly>
+                                    <x-input-error :messages="$errors->get('country_id')" class="mt-2" />
                                 </div>
+
 
                                 {{-- postal_code --}}
                                 <div class="input-area">
                                     <label for="postal_code" class="form-label">{{ __('Postal Code') }}<span
                                             class="text-red-500">*</span></label>
                                     <input id="postal_code" name="postal_code" type="text" class="form-control"
-                                           placeholder="Postal Code"
-                                           value="{{ old('postal_code') }}" required>
-                                    <x-input-error :messages="$errors->get('postal_code')" class="mt-2"/>
+                                        placeholder="Postal Code"
+                                        value="{{ old('postal_code', $facility->postal_code) }}" readonly>
+                                    <x-input-error :messages="$errors->get('postal_code')" class="mt-2" />
                                 </div>
 
-                                {{-- opening_hours--}}
+                                {{-- opening_hours --}}
                                 <div class="input-area">
-                                    <label for="opening_hours" class="form-label">{{ __('Opening Date & Time') }}<span
+                                    <label for="opening_hours"
+                                        class="form-label">{{ __('Opening Date & Time') }}<span
                                             class="text-red-500">*</span></label>
-                                    <input id="opening_hours" name="opening_hours" type="time" class="form-control">
-                                    <x-input-error :messages="$errors->get('opening_hours')" class="mt-2"/>
+                                    <input id="opening_hours" name="opening_hours" type="time"
+                                        class="form-control"
+                                        value="{{ old('opening_hours', $facility->opening_hours) }}" required readonly >
+                                    <x-input-error :messages="$errors->get('opening_hours')" class="mt-2" />
                                 </div>
 
                                 {{-- closing hours --}}
                                 <div class="input-area">
-                                    <label for="closing_hours" class="form-label">{{ __('Close Date & Time') }}</label>
-                                    <input id="closing_hours" name="closing_hours" type="time" class="form-control">
-                                    <x-input-error :messages="$errors->get('closing_hours')" class="mt-2"/>
+                                    <label for="closing_hours"
+                                        class="form-label">{{ __('Close Date & Time') }}</label>
+                                    <input id="closing_hours" name="closing_hours" type="time"
+                                        class="form-control"
+                                        value="{{ old('closing_hours', $facility->closing_hours ?? 'N/A') }}" readonly>
+                                    <x-input-error :messages="$errors->get('closing_hours')" class="mt-2" />
                                 </div>
 
                                 {{-- emergency_contact --}}
                                 <div class="input-area">
                                     <label for="emergency_contact"
-                                           class="form-label">{{ __('Emergency Contact') }}</label>
+                                        class="form-label">{{ __('Emergency Contact') }}</label>
                                     <input id="emergency_contact" name="emergency_contact" type="text"
-                                           class="form-control"
-                                           placeholder="Emergency Contact No" minlength="11" maxlength="15">
+                                        class="form-control"
+                                        value="{{ old('emergency_contact', $facility->emergency_contact ?? 'N/A') }}"
+                                        minlength="11" maxlength="15" readonly>
                                 </div>
 
                                 {{-- website --}}
@@ -236,22 +226,39 @@
                                     <label for="website" class="form-label">{{ __('website') }}<span
                                             class="text-red-500">*</span></label>
                                     <input id="website" name="website" type="text" class="form-control"
-                                           placeholder="Enter Website URL : https://www.emergencytime.com">
+                                        value="{{ old('website', $facility->website ?? 'N/A') }}" readonly>
+                                </div>
+
+                                {{--  longitude --}}
+                                <div class="input-area">
+                                    <label for="longitude" class="form-label">{{ __('Longitude') }}<span
+                                            class="text-red-500">*</span></label>
+                                    <input id="longitude" name="longitude" type="text" class="form-control"
+                                        value="{{ old('longitude', $facility->longitude ?? 'N/A') }}" readonly>
+                                    <x-input-error :messages="$errors->get('longitude')" class="mt-2" />
+                                </div>
+
+                                {{--  latitude --}}
+                                <div class="input-area">
+                                    <label for="latitude" class="form-label">{{ __('Latitude') }}<span
+                                            class="text-red-500">*</span></label>
+                                    <input id="latitude" name="latitude" type="text" class="form-control"
+                                        value="{{ old('latitude', $facility->latitude ?? 'N/A') }}" readonly>
+                                    <x-input-error :messages="$errors->get('latitude')" class="mt-2" />
                                 </div>
 
                                 {{--  address --}}
                                 <div class="input-area">
                                     <label for="address" class="form-label">{{ __('Address') }}<span
                                             class="text-red-500">*</span></label>
-                                    <textarea id="address" name="address" type="text" class="form-control"
-                                              placeholder="address" rows="4"></textarea>
-                                    <x-input-error :messages="$errors->get('address')" class="mt-2"/>
+                                    <textarea id="address" name="address" type="text" class="form-control" placeholder="address" rows="4" readonly>{{ old('address', $facility->address ?? 'N/A') }}</textarea>
+                                    <x-input-error :messages="$errors->get('address')" class="mt-2" />
                                 </div>
                             </div>
                         </div>
                         {{-- end of facility --}}
 
-                        {{--medical staff start--}}
+                        {{-- medical staff start --}}
                         <div class="wizard-form-step" data-step="2">
                             <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
                                 <div class="lg:col-span-3 md:col-span-2 col-span-1 mb-5">
@@ -264,22 +271,20 @@
                                             class="text-red-500">*</span></label>
                                     <div class="relative">
                                         <input type="text" id="name" name="name" class="form-control"
-                                               placeholder="Enter equipment name"
-                                               value="{{ old('name') }}" required>
-                                        <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+                                            placeholder="Enter equipment name" value="{{ old('name') }}" required>
+                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
                                 </div>
                                 {{-- Name end --}}
 
                                 {{-- Role start --}}
                                 <div class="input-area">
-                                    <label for="role" class="form-label">{{ __('Role') }}<span
+                                    <label for="memail" class="form-label">{{ __('Email') }}<span
                                             class="text-red-500">*</span></label>
                                     <div class="relative">
-                                        <input type="text" id="role" name="role" class="form-control"
-                                               placeholder="Enter your role"
-                                               value="{{ old('role') }}">
-                                        <x-input-error :messages="$errors->get('role')" class="mt-2"/>
+                                        <input type="email" id="email" name="email" class="form-control"
+                                            placeholder="Enter your role" value="{{ old('role') }}">
+                                        <x-input-error :messages="$errors->get('role')" class="mt-2" />
                                     </div>
                                 </div>
                                 {{-- Role end --}}
@@ -289,12 +294,12 @@
                                     <label for="image" class="form-label">{{ __('Equipment Image') }}</label>
                                     <div class="relative">
                                         <input type="file" id="image" name="image" class="form-control"
-                                               placeholder="Upload image" accept="image/*">
-                                        <x-input-error :messages="$errors->get('image')" class="mt-2"/>
+                                            placeholder="Upload image" accept="image/*">
+                                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
                                         {{-- Image preview --}}
                                         <div id="image-preview-container" style="margin-top: 10px;">
                                             <img id="image-preview" src="" alt="Image Preview"
-                                                 style="display: none; width: 100px; height: 100px; object-fit: cover;"/>
+                                                style="display: none; width: 100px; height: 100px; object-fit: cover;" />
                                         </div>
                                     </div>
                                 </div>
@@ -306,7 +311,7 @@
                                             class="text-red-500">*</span></label>
                                     <select id="country_code" name="country_code" class="form-control" required>
                                         <option value="" selected disabled> Select Specialty</option>
-                                        @foreach($specialties as $specialty)
+                                        @foreach ($specialties as $specialty)
                                             <option value="{{ $specialty->id }}">{{ $specialty->name }}</option>
                                         @endforeach
                                     </select>
@@ -317,16 +322,16 @@
                                 <div class="input-area">
                                     <label for="description" class="form-label">{{ __('Description') }}</label>
                                     <div class="relative">
-                <textarea type="text" id="description" name="description" class="form-control"
-                          placeholder="Enter equipment description">{{ old('description') }}</textarea>
-                                        <x-input-error :messages="$errors->get('description')" class="mt-2"/>
+                                        <textarea type="text" id="description" name="description" class="form-control"
+                                            placeholder="Enter equipment description">{{ old('description') }}</textarea>
+                                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
                                 </div>
                                 {{-- Description end --}}
 
                             </div>
                         </div>
-                        {{--medical staff end--}}
+                        {{-- medical staff end --}}
 
                         {{--  treatment start --}}
                         <div class="wizard-form-step" data-step="3">
@@ -341,9 +346,8 @@
                                             class="text-red-500">*</span></label>
                                     <div class="relative">
                                         <input type="text" id="name" name="name" class="form-control"
-                                               placeholder="Enter equipment name"
-                                               value="{{ old('name') }}" required>
-                                        <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+                                            placeholder="Enter equipment name" value="{{ old('name') }}" required>
+                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
                                 </div>
                                 <!-- Name end -->
@@ -353,10 +357,10 @@
                                     <label for="category_name" class="form-label">{{ __('Category Name') }}<span
                                             class="text-red-500">*</span></label>
                                     <div class="relative">
-                                        <input type="text" id="category_name" name="category_name" class="form-control"
-                                               placeholder="Enter category name e.g: Bone"
-                                               value="{{ old('category_name') }}" required>
-                                        <x-input-error :messages="$errors->get('category_name')" class="mt-2"/>
+                                        <input type="text" id="category_name" name="category_name"
+                                            class="form-control" placeholder="Enter category name e.g: Bone"
+                                            value="{{ old('category_name') }}" required>
+                                        <x-input-error :messages="$errors->get('category_name')" class="mt-2" />
                                     </div>
                                 </div>
                                 <!-- Category Name end -->
@@ -366,10 +370,10 @@
                                     <label for="disease_name" class="form-label">{{ __('Disease Name') }}<span
                                             class="text-red-500">*</span></label>
                                     <div class="relative">
-                                        <input type="text" id="disease_name" name="disease_name" class="form-control"
-                                               placeholder="Enter disease name e.g: Flu"
-                                               value="{{ old('disease_name') }}" required>
-                                        <x-input-error :messages="$errors->get('disease_name')" class="mt-2"/>
+                                        <input type="text" id="disease_name" name="disease_name"
+                                            class="form-control" placeholder="Enter disease name e.g: Flu"
+                                            value="{{ old('disease_name') }}" required>
+                                        <x-input-error :messages="$errors->get('disease_name')" class="mt-2" />
                                     </div>
                                 </div>
                                 <!-- Disease Name end -->
@@ -378,9 +382,8 @@
                                 <div class="input-area">
                                     <label for="description" class="form-label">{{ __('Description') }}</label>
                                     <div class="relative">
-        <textarea id="description" name="description" class="form-control"
-                  placeholder="Enter equipment description">{{ old('description') }}</textarea>
-                                        <x-input-error :messages="$errors->get('description')" class="mt-2"/>
+                                        <textarea id="description" name="description" class="form-control" placeholder="Enter equipment description">{{ old('description') }}</textarea>
+                                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
                                 </div>
                                 <!-- Description end -->
@@ -414,7 +417,7 @@
 
     @push('scripts')
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function() {
                 let currentStep = 1;
 
                 // Get all steps and step indicators
@@ -477,54 +480,50 @@
                     stepIndicators[currentStep - 1].classList.add("active");
                 }
 
-                // Function to update button visibility based on the current step
                 function updateButtonVisibility() {
                     if (currentStep === 1) {
-                        prevButton.classList.add("hidden"); // Hide "prev" on the first step
-                        nextButton.classList.remove("hidden"); // Show "next"
-                        saveButton.classList.add("hidden"); // Hide "save"
+                        prevButton.classList.add("hidden");
+                        nextButton.classList.remove("hidden");
+                        saveButton.classList.add("hidden");
                     } else if (currentStep === totalSteps) {
-                        prevButton.classList.remove("hidden"); // Show "prev"
-                        nextButton.classList.add("hidden"); // Hide "next"
-                        saveButton.classList.remove("hidden"); // Show "save"
+                        prevButton.classList.remove("hidden");
+                        nextButton.classList.add("hidden");
+                        saveButton.classList.remove("hidden");
                     } else {
-                        prevButton.classList.remove("hidden"); // Show "prev"
-                        nextButton.classList.remove("hidden"); // Show "next"
-                        saveButton.classList.add("hidden"); // Hide "save"
+                        prevButton.classList.remove("hidden");
+                        nextButton.classList.remove("hidden");
+                        saveButton.classList.add("hidden");
                     }
                 }
 
-                // Event listener for the "next" button
-                nextButton.addEventListener("click", function () {
+                nextButton.addEventListener("click", function() {
                     if (currentStep < totalSteps) {
-                        currentStep++; // Increment step
-                        updateStep(); // Update visible step
+                        currentStep++;
+                        updateStep();
                     }
                 });
 
-                // Event listener for the "previous" button
-                prevButton.addEventListener("click", function () {
+                prevButton.addEventListener("click", function() {
                     if (currentStep > 1) {
-                        currentStep--; // Decrement step
-                        updateStep(); // Update visible step
+                        currentStep--;
+                        updateStep();
                     }
                 });
 
-                // Initialize the first step and set button visibility
-                updateStep(); // Display the correct initial step
+                updateStep();
             });
 
             // image preview for medical staff
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function() {
                 // Preview image before uploading
                 const imageInput = document.getElementById('image');
                 const imagePreview = document.getElementById('image-preview');
 
-                imageInput.addEventListener('change', function () {
+                imageInput.addEventListener('change', function() {
                     const file = this.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = function (e) {
+                        reader.onload = function(e) {
                             imagePreview.setAttribute('src', e.target.result);
                             imagePreview.style.display = 'block';
                         };

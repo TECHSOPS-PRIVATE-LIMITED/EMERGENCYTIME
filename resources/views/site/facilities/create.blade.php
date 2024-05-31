@@ -65,7 +65,7 @@
                                     <label for="phone_number" class="form-label">{{ __('Phone Number') }}<span
                                             class="text-red-500">*</span></label>
                                     <input id="phone_number" name="phone_number" type="text" class="form-control"
-                                           placeholder="2887385893" minlength="10" maxlength="10" required value="{{ old('phone_number') }}">
+                                           placeholder="3099252125" minlength="10" maxlength="10" required value="{{ old('phone_number') }}">
                                     <x-input-error :messages="$errors->get('phone_number')" class="mt-2"/>
                                 </div>
 
@@ -165,19 +165,11 @@
 
                                 </div>
 
-                                {{-- Address --}}
-                                <div class="input-area">
-                                    <label for="address" class="form-label">{{ __('Address') }}<span class="text-red-500">*</span></label>
-                                    <textarea id="address" name="address" class="form-control"
-                                              placeholder="Enter Address" rows="4" required>{{ old('address') }}</textarea>
-                                    <x-input-error :messages="$errors->get('address')" class="mt-2"/>
-                                </div>
-
-                                {{-- longitude --}}
-                                <div class="input-area">
-                                    <label for="longitude" class="form-label">{{ __('Longitude') }}<span class="text-red-500">*</span></label>
+                                 {{-- longitude --}}
+                                 <div class="input-area">
+                                    <label for="longitude" class="form-label">{{ __('Longitude') }}</label>
                                     <input type="text" id="longitude" name="longitude" class="form-control"
-                                              placeholder="Enter longitude" >{{ old('longitude') }}
+                                              placeholder="Enter longitude" value="{{ old('longitude') }}">
                                     <x-input-error :messages="$errors->get('longitude')" class="mt-2"/>
                                 </div>
 
@@ -187,6 +179,14 @@
                                     <input id="latitude" name="latitude" type="text" class="form-control"
                                            placeholder="Enter latitude " value="{{ old('latitude') }}">
                                     <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
+                                </div>
+
+                                {{-- Address --}}
+                                <div class="input-area">
+                                    <label for="address" class="form-label">{{ __('Address') }}<span class="text-red-500">*</span></label>
+                                    <textarea id="address" name="address" class="form-control"
+                                              placeholder="Enter Address" rows="4" required>{{ old('address') }}</textarea>
+                                    <x-input-error :messages="$errors->get('address')" class="mt-2"/>
                                 </div>
 
                             </div>
