@@ -9,6 +9,8 @@ class MedicalStaffSpecialty extends Model
 {
     use HasFactory;
 
+    protected  $table = "medical_staff_specialties";
+
     protected $fillable = [
         'medical_staff_id',
         'specialty_id'

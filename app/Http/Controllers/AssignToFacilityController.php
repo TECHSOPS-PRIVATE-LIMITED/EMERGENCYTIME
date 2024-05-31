@@ -19,12 +19,12 @@ class AssignToFacilityController extends Controller
             ]
         ];
         $facility = $facility->with('country')->first();
-        $medicalStaff = MedicalStaff::with('specialties')->get();
+        $medicalStaffs = MedicalStaff::with('specialties')->get();
         $specialties = Specialty::all();
         return view('site.assign_to_hospitals.assign_to_hospital', [
             'breadcrumbItems' => $breadcrumbsItems,
             'facility' => $facility,
-            'medicalStaff' => $medicalStaff,
+            'medicalStaffs' => $medicalStaffs,
             'specialties' => $specialties,
             'pageTitle' => 'Assign To Hospitals'
         ]);

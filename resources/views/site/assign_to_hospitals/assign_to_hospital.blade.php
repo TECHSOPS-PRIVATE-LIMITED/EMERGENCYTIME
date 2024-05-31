@@ -259,9 +259,9 @@
                         {{-- end of facility --}}
 
                         {{-- medical staff start --}}
-                        <div class="wizard-form-step" data-step="2">
-                            <div class="overflow-x-auto mb-5">
-                                <table class="w-full table-auto divide-y divide-gray-200">
+                        <div class="wizard-form-step " data-step="2">
+                            <div class="overflow-x-auto">
+                                <table class="w-full table-auto divide-y divide-gray-200 my-10">
                                     <thead>
                                     <tr>
                                         <th scope="col"
@@ -283,28 +283,47 @@
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
-                                            Specialty
+                                            License Number
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
-                                            Description
+                                            Gender
                                         </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                            Specialty
+                                        </th>
+
                                     </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-
+@forelse($medicalStaffs as $staff)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <input type="checkbox"
                                                    class="form-checkbox h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">1</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">john@example.com</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cardiology</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Cardiologist</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->id }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->email }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->medical_license_number }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->gender }} </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @foreach($medicalStaffs as $medicalStaff)
+                                                <p>{{ $medicalStaff->name }}</p>
+                                                <ul>
+                                                    @foreach($medicalStaff->specialties as $specialty)
+                                                        <li>{{ $specialty->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endforeach
+                                        </td>
                                     </tr>
-
+@empty
+    <tr>
+        <strong class="text-center text-red-500">No Staff Available</strong>
+    </tr>
+@endforelse
                                     </tbody>
                                 </table>
                             </div>

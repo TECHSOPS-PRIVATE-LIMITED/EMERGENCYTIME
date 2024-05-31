@@ -19,7 +19,7 @@ class Specialty extends Model
 
     public function medicalStaff(): BelongsToMany
     {
-        return $this->belongsToMany(MedicalStaff::class, 'medical_staff_specialty', 'specialty_id', 'medical_staff_id');
+        return $this->belongsToMany(MedicalStaff::class, 'medical_staff_specialties', 'specialty_id', 'medical_staff_id');
     }
 
     //user
