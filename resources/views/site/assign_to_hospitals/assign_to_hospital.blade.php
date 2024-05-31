@@ -260,75 +260,53 @@
 
                         {{-- medical staff start --}}
                         <div class="wizard-form-step" data-step="2">
-                            <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                <div class="lg:col-span-3 md:col-span-2 col-span-1 mb-5">
-                                    <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">
-                                    </h4>
-                                </div>
-                                {{-- Name start --}}
-                                <div class="input-area">
-                                    <label for="name" class="form-label">{{ __('Name') }}<span
-                                            class="text-red-500">*</span></label>
-                                    <div class="relative">
-                                        <input type="text" id="name" name="name" class="form-control"
-                                            placeholder="Enter equipment name" value="{{ old('name') }}" required>
-                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                                    </div>
-                                </div>
-                                {{-- Name end --}}
+                            <div class="overflow-x-auto mb-5">
+                                <table class="w-full table-auto divide-y divide-gray-200">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                            <input type="checkbox"
+                                                   class="form-checkbox h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                            ID
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                            Name
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                            Email
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                            Specialty
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                            Description
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
 
-                                {{-- Role start --}}
-                                <div class="input-area">
-                                    <label for="memail" class="form-label">{{ __('Email') }}<span
-                                            class="text-red-500">*</span></label>
-                                    <div class="relative">
-                                        <input type="email" id="email" name="email" class="form-control"
-                                            placeholder="Enter your role" value="{{ old('role') }}">
-                                        <x-input-error :messages="$errors->get('role')" class="mt-2" />
-                                    </div>
-                                </div>
-                                {{-- Role end --}}
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <input type="checkbox"
+                                                   class="form-checkbox h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">1</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">john@example.com</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">Cardiology</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">Cardiologist</td>
+                                    </tr>
 
-                                {{-- Image start --}}
-                                <div class="input-area">
-                                    <label for="image" class="form-label">{{ __('Equipment Image') }}</label>
-                                    <div class="relative">
-                                        <input type="file" id="image" name="image" class="form-control"
-                                            placeholder="Upload image" accept="image/*">
-                                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                                        {{-- Image preview --}}
-                                        <div id="image-preview-container" style="margin-top: 10px;">
-                                            <img id="image-preview" src="" alt="Image Preview"
-                                                style="display: none; width: 100px; height: 100px; object-fit: cover;" />
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- Image end --}}
-
-                                {{--  specialty select start --}}
-                                <div class="input-area">
-                                    <label for="country_code" class="form-label">{{ __('Specialty') }}<span
-                                            class="text-red-500">*</span></label>
-                                    <select id="country_code" name="country_code" class="form-control" required>
-                                        <option value="" selected disabled> Select Specialty</option>
-                                        @foreach ($specialties as $specialty)
-                                            <option value="{{ $specialty->id }}">{{ $specialty->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                {{--  specialty select end --}}
-
-                                {{-- Description start --}}
-                                <div class="input-area">
-                                    <label for="description" class="form-label">{{ __('Description') }}</label>
-                                    <div class="relative">
-                                        <textarea type="text" id="description" name="description" class="form-control"
-                                            placeholder="Enter equipment description">{{ old('description') }}</textarea>
-                                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                                    </div>
-                                </div>
-                                {{-- Description end --}}
-
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         {{-- medical staff end --}}
