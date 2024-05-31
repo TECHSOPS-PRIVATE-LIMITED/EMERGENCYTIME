@@ -68,6 +68,9 @@
                                     <th scope="col" class="table-th ">
                                         {{ __('Phone No') }}
                                     </th>
+                                    <th scope="col" class="table-th ">
+                                        {{ __('Assign Resources') }}
+                                    </th>
                                     <th scope="col" class="table-th w-20">
                                         {{ __('Action') }}
                                     </th>
@@ -102,6 +105,10 @@
 
                                         <td class="table-td">
                                             {{ $facility->phone_number }}
+                                        </td>
+
+                                        <td class="table-td">
+                                            <a href="{{ route('assign.to.facility.index', ['facility' => $facility]) }}" class="btn btn-warning">Assign</a>
                                         </td>
 
                                         <td class="table-td">

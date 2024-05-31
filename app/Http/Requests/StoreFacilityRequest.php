@@ -29,7 +29,7 @@ class StoreFacilityRequest extends FormRequest
             'type' => 'required|in:hospital,clinic,consultancy,daycare,lab,diagnostic',
             'email' => 'required|email|max:255|unique:facilities,email',
             'country_id' => 'required|exists:countries,id',
-            'phone' => 'required|string|regex:/^[0-9\-\s\(\)]{10,15}$/',
+            'phone_number' => ['required', 'string', 'regex:/^(\d{10}|\d{3}[-\s]?\d{3}[-\s]?\d{4})$/'],
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:60',
             'state' => 'required|string|max:60',
@@ -38,10 +38,10 @@ class StoreFacilityRequest extends FormRequest
             'hipaa_status' => 'required|in:yes,no',
             'opening_hours' => 'required|string|max:100',
             'closing_hours' => 'nullable|string|max:100',
-            'emergency_contact' => 'nullable|string|regex:/^\d{11,15}$/',
+            'emergency_contact' => ['nullable', 'string', 'regex:/^(\d{11}|\d{3}[-\s]?\d{3}[-\s]?\d{4})$/'],
             'website' => 'nullable|url|max:255',
-            'longitude' => 'required|numeric|between:-180,180',
-            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'nullable|numeric|between:-180,180',
+            'latitude' => 'nullable|numeric|between:-90,90',
         ];
     }
 }

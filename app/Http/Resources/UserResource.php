@@ -22,17 +22,13 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'is_email_verified' => !is_null($this->email_verified_at),
             'created_at' => $this->created_at,
-            'role' => $role?->name,
-            'permissions' => $role?->permissions->pluck('name'),
-            'photo' => $this->getFirstMediaUrl('profile-image')?: Avatar::create($this->name)->toBase64(),
-            'phone' => $this->phone,
-            'post_code' => $this->post_code,
-            'city' => $this->city,
-            'country' => $this->country,
-            'is_pending_email' => !is_null($this->getPendingEmail()),
-            'pending_email' => $this->getPendingEmail(),
+            'role' => optional($role)->name,
+            'permissions' => optional($role)->permissions->pluck('name') ?? [],
+            'photo' => $this->photo ? url($this->photo) : Avatar::create($this->name)->toBase64(),
+            'phone' => $this->phone ?? '',
+            'city' => $this->city ?? '',
+            'country_id' => $this->country->id,
         ];
     }
 }

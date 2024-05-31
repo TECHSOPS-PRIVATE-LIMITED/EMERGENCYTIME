@@ -185,6 +185,22 @@
 
                                 </div>
 
+                                {{-- longitude --}}
+                                <div class="input-area">
+                                    <label for="longitude" class="form-label">{{ __('Longitude') }}</label>
+                                    <input type="text" id="longitude" name="longitude" class="form-control"
+                                              placeholder="Enter longitude" value="{{ old('longitude',$facility->longitude ?? null) }}">
+                                    <x-input-error :messages="$errors->get('longitude')" class="mt-2"/>
+                                </div>
+
+                                {{-- latitude --}}
+                                <div class="input-area">
+                                    <label for="latitude" class="form-label">{{ __('Latitude') }}</label>
+                                    <input id="latitude" name="latitude" type="text" class="form-control"
+                                           placeholder="Enter latitude " value="{{ old('latitude',$facility->latitude ?? null) }}">
+                                    <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
+                                </div>
+
                                 {{--  address --}}
                                 <div class="input-area">
                                     <label for="address" class="form-label">{{ __('Address') }}<span
@@ -195,28 +211,6 @@
                             </div>
                         </div>
                         {{-- end of facility --}}
-
-                        {{-- longitude --}}
-                        <div class="input-area">
-                            <label for="longitude" class="form-label">{{ __('Longitude') }}<span
-                                    class="text-red-500">*</span></label>
-                            <input type="text" id="longitude" name="longitude" class="form-control"
-                                placeholder="Enter longitude"
-                                value="{{ old('longitude', $facility->longitude ?? null) }}" >
-                            <x-input-error :messages="$errors->get('longitude')" class="mt-2" />
-                        </div>
-
-                        {{-- latitude --}}
-                        <div class="input-area">
-                            <label for="latitude" class="form-label">{{ __('Latitude') }}<span
-                                    class="text-red-500">*</span></label>
-                            <input id="latitude" name="latitude" type="text" class="form-control"
-                                placeholder="Enter latitude"
-                                value="{{ old('latitude', $facility->latitude ?? null) }}" >
-                            <x-input-error :messages="$errors->get('latitude')" class="mt-2" />
-                        </div>
-
-
 
                         {{-- save --}}
                         <div class="mt-6 flex justify-center">

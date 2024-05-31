@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Models\User;
+use App\Models\Country;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -20,7 +21,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profiles.index');
+        $countries = Country::all();
+        return view('profiles.index', compact('countries'));
     }
 
     /**
@@ -75,20 +77,22 @@ class ProfileController extends Controller
      */
     public function update(UpdateProfileRequest $request, User $user)
     {
-        $user->update($request->safe(['name', 'phone', 'post_code', 'city', 'country']));
+        $user->update($request->safe(['name', 'phone', 'city', 'country_id']));
 
-        // sends verification email if email has changed
-        if( $user->email !== $request->validated('email') ) {
-            $user->newEmail($request->validated('email'));
-        }
-
-        if( $request->hasFile('photo')) {
-            $user->clearMediaCollection('profile-image');
-            $user->addMediaFromRequest('photo')->toMediaCollection('profile-image');
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            if ($user->photo) {
+                $photoPath = str_replace('storage', 'public', $user->photo);
+                Storage::delete($photoPath);
+            }
+            $photo = $request->file('photo');
+            $photoName = time() . '_' . $photo->getClientOriginalName();
+            $photo->storeAs('public/users_images', $photoName);
+            $user->update(['photo' => 'storage/users_images/' . $photoName]);
         }
 
         return to_route('profiles.index')->with('message', 'Profile updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.

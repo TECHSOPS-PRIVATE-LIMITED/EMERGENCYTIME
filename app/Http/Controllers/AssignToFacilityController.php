@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
+use App\Models\Facility;
+use App\Models\MedicalStaff;
 use App\Models\Specialty;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class AssignToFacilityController extends Controller
 {
-    public function index() : View
+    public function index(Facility $facility): View
     {
         $breadcrumbsItems = [
             [
@@ -18,11 +18,13 @@ class AssignToFacilityController extends Controller
                 'active' => true
             ]
         ];
-        $countries  = Country::all();
+        $facility = $facility->with('country')->first();
+        $medicalStaff = MedicalStaff::with('specialties')->get();
         $specialties = Specialty::all();
-        return view('site.assign_to_hospitals.assign_to_hospital',[
+        return view('site.assign_to_hospitals.assign_to_hospital', [
             'breadcrumbItems' => $breadcrumbsItems,
-            'countries' => $countries,
+            'facility' => $facility,
+            'medicalStaff' => $medicalStaff,
             'specialties' => $specialties,
             'pageTitle' => 'Assign To Hospitals'
         ]);
