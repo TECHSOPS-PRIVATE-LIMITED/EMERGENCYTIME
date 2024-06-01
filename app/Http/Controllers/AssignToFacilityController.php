@@ -6,6 +6,7 @@ use App\Models\Facility;
 use App\Models\MedicalStaff;
 use App\Models\Specialty;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class AssignToFacilityController extends Controller
 {
@@ -19,14 +20,20 @@ class AssignToFacilityController extends Controller
             ]
         ];
         $facility = $facility->with('country')->first();
-        $medicalStaff = MedicalStaff::with('specialties')->get();
+        $medicalStaffs = MedicalStaff::with('specialties')->get();
         $specialties = Specialty::all();
         return view('site.assign_to_hospitals.assign_to_hospital', [
             'breadcrumbItems' => $breadcrumbsItems,
             'facility' => $facility,
-            'medicalStaff' => $medicalStaff,
+            'medicalStaffs' => $medicalStaffs,
             'specialties' => $specialties,
             'pageTitle' => 'Assign To Hospitals'
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $selectedIds = $request->input('selected_ids', []);
+        dd($selectedIds);
     }
 }

@@ -31,33 +31,40 @@ class StripePaymentController extends Controller
      * @throws ApiErrorException
      */
 
-        function stripePost(Request $request): RedirectResponse
-        {
-            Stripe::setApiKey(env('STRIPE_SECRET'));
+     public function stripePost(Request $request): RedirectResponse
+     {
+         try {
+             Stripe::setApiKey(env('STRIPE_SECRET'));
 
-            Charge::create([
-                "amount" => 100 * 100,
-                "currency" => "usd",
-                "source" => $request->stripeToken,
-                "description" => "Test payment from Emergency Time."
-            ]);
+             // Create a charge
+             $charge = Charge::create([
+                 "amount" => 5 * 100,
+                 "currency" => "usd",
+                 "source" => $request->stripeToken,
+                 "description" => "Test payment from Emergency Time."
+             ]);
 
-            // Create a subscription record
-            Subscription::create([
-                'user_id' => auth()->id(),
-                'plan_type' => 'Pro',
-                'start_date' => now(),
-                'end_date' => now()->addMonth(),
-                'auto_renew' => true,
-                'price' => 100,
-                'status' => 'active',
-            ]);
+             // Create a subscription record
+             Subscription::create([
+                 'user_id' => auth()->id(),
+                 'plan_type' => 'premium',
+                 'start_date' => now(),
+                 'end_date' => now()->addMonth(),
+                 'auto_renew' => true,
+                 'price' => 100,
+                 'status' => 'active',
+             ]);
 
-            // Flash success message
-            Session::flash('success', 'Payment successful!');
+             Session::flash('success', 'Payment successful!');
+             
+         } catch (ApiErrorException $e) {
+             Session::flash('error', 'Payment failed: ' . $e->getMessage());
 
-            return back();
-        }
+         }
+
+         return back();
+     }
+
     }
 
 
