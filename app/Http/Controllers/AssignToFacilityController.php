@@ -6,6 +6,7 @@ use App\Models\Facility;
 use App\Models\MedicalStaff;
 use App\Models\Specialty;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class AssignToFacilityController extends Controller
 {
@@ -28,5 +29,11 @@ class AssignToFacilityController extends Controller
             'specialties' => $specialties,
             'pageTitle' => 'Assign To Hospitals'
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $selectedIds = $request->input('selected_ids', []);
+        dd($selectedIds);
     }
 }

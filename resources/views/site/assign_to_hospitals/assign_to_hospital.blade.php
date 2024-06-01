@@ -108,7 +108,8 @@
                                     <label for="name" class="form-label">{{ __('Type') }} <span
                                             class="text-red-500">*</span></label>
                                     <input id="type" name="type" type="text" class="form-control"
-                                        placeholder="Enter Type" value="{{ old('name', $facility->type) }}" required readonly>
+                                        placeholder="Enter Type" value="{{ old('name', $facility->type) }}" required
+                                        readonly>
                                     <x-input-error :messages="$errors->get('type')" class="mt-2" />
                                 </div>
 
@@ -117,8 +118,7 @@
                                     <label for="email" class="form-label">{{ __('Email') }}<span
                                             class="text-red-500">*</span></label>
                                     <input id="email" type="email" class="form-control"
-                                           value="{{ old('email', $facility->email) }}"
-                                        required readonly>
+                                        value="{{ old('email', $facility->email) }}" required readonly>
                                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                 </div>
 
@@ -175,7 +175,7 @@
                                     <label for="country_id" class="form-label">{{ __('Country Code') }}<span
                                             class="text-red-500">*</span></label>
                                     <input id="country_id" name="country_id" type="text" class="form-control"
-                                    value="{{ old('country_id', optional($facility->country)->name) }}" readonly>
+                                        value="{{ old('country_id', optional($facility->country)->name) }}" readonly>
                                     <x-input-error :messages="$errors->get('country_id')" class="mt-2" />
                                 </div>
 
@@ -197,7 +197,8 @@
                                             class="text-red-500">*</span></label>
                                     <input id="opening_hours" name="opening_hours" type="time"
                                         class="form-control"
-                                        value="{{ old('opening_hours', $facility->opening_hours) }}" required readonly >
+                                        value="{{ old('opening_hours', $facility->opening_hours) }}" required
+                                        readonly>
                                     <x-input-error :messages="$errors->get('opening_hours')" class="mt-2" />
                                 </div>
 
@@ -207,7 +208,8 @@
                                         class="form-label">{{ __('Close Date & Time') }}</label>
                                     <input id="closing_hours" name="closing_hours" type="time"
                                         class="form-control"
-                                        value="{{ old('closing_hours', $facility->closing_hours ?? 'N/A') }}" readonly>
+                                        value="{{ old('closing_hours', $facility->closing_hours ?? 'N/A') }}"
+                                        readonly>
                                     <x-input-error :messages="$errors->get('closing_hours')" class="mt-2" />
                                 </div>
 
@@ -251,7 +253,8 @@
                                 <div class="input-area">
                                     <label for="address" class="form-label">{{ __('Address') }}<span
                                             class="text-red-500">*</span></label>
-                                    <textarea id="address" name="address" type="text" class="form-control" placeholder="address" rows="4" readonly>{{ old('address', $facility->address ?? 'N/A') }}</textarea>
+                                    <textarea id="address" name="address" type="text" class="form-control" placeholder="address" rows="4"
+                                        readonly>{{ old('address', $facility->address ?? 'N/A') }}</textarea>
                                     <x-input-error :messages="$errors->get('address')" class="mt-2" />
                                 </div>
                             </div>
@@ -259,132 +262,150 @@
                         {{-- end of facility --}}
 
                         {{-- medical staff start --}}
-                        <div class="wizard-form-step " data-step="2">
+                        <div class="wizard-form-step" data-step="2">
                             <div class="overflow-x-auto">
                                 <table class="w-full table-auto divide-y divide-gray-200 my-10">
                                     <thead>
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
-                                            <input type="checkbox"
-                                                   class="form-checkbox h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
-                                            ID
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
-                                            Name
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
-                                            Email
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
-                                            License Number
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
-                                            Gender
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
-                                            Specialty
-                                        </th>
-
-                                    </tr>
+                                        <tr>
+                                            <th scope="col"
+                                                class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                                <input type="checkbox"
+                                                    class="form-checkbox h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                                ID
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                                Name
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                                Email
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                                License Number
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                                Gender
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                                                Specialty
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-@forelse($medicalStaffs as $staff)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <input type="checkbox"
-                                                   class="form-checkbox h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->id }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->name }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->email }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->medical_license_number }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $staff->gender }} </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            @foreach($medicalStaffs as $medicalStaff)
-                                                <p>{{ $medicalStaff->name }}</p>
-                                                <ul>
-                                                    @foreach($medicalStaff->specialties as $specialty)
-                                                        <li>{{ $specialty->name }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            @endforeach
-                                        </td>
-                                    </tr>
-@empty
-    <tr>
-        <strong class="text-center text-red-500">No Staff Available</strong>
-    </tr>
-@endforelse
+                                        @forelse($medicalStaffs as $staff)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <input type="checkbox" name="staff_ids[]"
+                                                        value="{{ $staff->id }}"
+                                                        class="form-checkbox h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">{{ $staff->id }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">{{ $staff->name }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">{{ $staff->email }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $staff->medical_license_number }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">{{ $staff->gender }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <ul>
+                                                        @foreach ($staff->specialties as $specialty)
+                                                            <li>{{ $specialty->name }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="7" class="text-center text-red-500">No Staff Available
+                                                </td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         {{-- medical staff end --}}
 
+
                         {{--  treatment start --}}
                         <div class="wizard-form-step" data-step="3">
-                            <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                                <div class="lg:col-span-3 md:col-span-2 col-span-1">
-                                    <h4 class="text-base text-slate-800 dark:text-slate-300 my-6">Treatment</h4>
-                                </div>
 
-                                <!-- Name Field -->
-                                <div class="input-area">
-                                    <label for="name" class="form-label">{{ __('Name') }}<span
-                                            class="text-red-500">*</span></label>
-                                    <div class="relative">
-                                        <input type="text" id="name" name="name" class="form-control"
-                                            placeholder="Enter equipment name" value="{{ old('name') }}" required>
-                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                                    </div>
-                                </div>
-                                <!-- Name end -->
+{{-- table start --}}
+<div class="overflow-x-auto">
+    <table class="w-full table-auto divide-y divide-gray-200 my-10">
+        <thead>
+            <tr>
+                <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                    <input type="checkbox"
+                        class="form-checkbox h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                </th>
+                <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                    ID
+                </th>
+                <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                </th>
+                <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                    Email
+                </th>
+                <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                    License Number
+                </th>
+                <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                    Gender
+                </th>
+                <th scope="col"
+                    class="px-6 py-3 bg-gray-50 text-left text-xs md:text-sm lg:text-base font-medium text-gray-500 uppercase tracking-wider">
+                    Specialty
+                </th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            @forelse($medicalStaffs as $staff)
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <input type="checkbox" name="staff_ids[]"
+                            value="{{ $staff->id }}"
+                            class="form-checkbox h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $staff->id }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $staff->name }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $staff->email }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        {{ $staff->medical_license_number }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $staff->gender }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <ul>
+                            @foreach ($staff->specialties as $specialty)
+                                <li>{{ $specialty->name }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7" class="text-center text-red-500">No Staff Available
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+{{-- table end --}}
 
-                                <!-- Category Name Field -->
-                                <div class="input-area">
-                                    <label for="category_name" class="form-label">{{ __('Category Name') }}<span
-                                            class="text-red-500">*</span></label>
-                                    <div class="relative">
-                                        <input type="text" id="category_name" name="category_name"
-                                            class="form-control" placeholder="Enter category name e.g: Bone"
-                                            value="{{ old('category_name') }}" required>
-                                        <x-input-error :messages="$errors->get('category_name')" class="mt-2" />
-                                    </div>
-                                </div>
-                                <!-- Category Name end -->
 
-                                <!-- Disease Name Field -->
-                                <div class="input-area">
-                                    <label for="disease_name" class="form-label">{{ __('Disease Name') }}<span
-                                            class="text-red-500">*</span></label>
-                                    <div class="relative">
-                                        <input type="text" id="disease_name" name="disease_name"
-                                            class="form-control" placeholder="Enter disease name e.g: Flu"
-                                            value="{{ old('disease_name') }}" required>
-                                        <x-input-error :messages="$errors->get('disease_name')" class="mt-2" />
-                                    </div>
-                                </div>
-                                <!-- Disease Name end -->
-
-                                <!-- Description Field -->
-                                <div class="input-area">
-                                    <label for="description" class="form-label">{{ __('Description') }}</label>
-                                    <div class="relative">
-                                        <textarea id="description" name="description" class="form-control" placeholder="Enter equipment description">{{ old('description') }}</textarea>
-                                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                                    </div>
-                                </div>
-                                <!-- Description end -->
-                            </div>
                         </div>
                         {{--  treatment end --}}
 
@@ -403,7 +424,7 @@
                         <div class="mt-6 space-x-3">
                             <button id="prev-button" class="btn btn-dark" type="button">Prev</button>
                             <button id="next-button" class="btn btn-dark" type="button">Next</button>
-                            <button id="save-button" class="btn btn-dark" type="button">Save</button>
+                            <button id="save-button" class="btn btn-dark" type="submit">Save</button>
                         </div>
                     </form>
                 </div>
@@ -510,27 +531,6 @@
                 updateStep();
             });
 
-            // image preview for medical staff
-            document.addEventListener("DOMContentLoaded", function() {
-                // Preview image before uploading
-                const imageInput = document.getElementById('image');
-                const imagePreview = document.getElementById('image-preview');
-
-                imageInput.addEventListener('change', function() {
-                    const file = this.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            imagePreview.setAttribute('src', e.target.result);
-                            imagePreview.style.display = 'block';
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        imagePreview.setAttribute('src', '');
-                        imagePreview.style.display = 'none';
-                    }
-                });
-            });
         </script>
     @endpush
 </x-app-layout>
