@@ -37,7 +37,7 @@ class StoreMedicalStaffRequest extends FormRequest
                 'phone' => 'required|string|regex:/^[0-9\-\s\(\)]{10,15}$/',
                 'image' => 'nullable|image|max:5120',
                 'description' => 'nullable|string',
-                'facility_id' => 'nullable|exists:facilities,id',
+//                'facility_id' => 'nullable|exists:facilities,id',
             ];
     }
 

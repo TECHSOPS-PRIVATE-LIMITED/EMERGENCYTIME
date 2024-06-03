@@ -51,12 +51,12 @@ class StripePaymentController extends Controller
                  'start_date' => now(),
                  'end_date' => now()->addMonth(),
                  'auto_renew' => true,
-                 'price' => 100,
+                 'price' => 5,
                  'status' => 'active',
              ]);
 
              Session::flash('success', 'Payment successful!');
-             
+
          } catch (ApiErrorException $e) {
              Session::flash('error', 'Payment failed: ' . $e->getMessage());
 

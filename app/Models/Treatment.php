@@ -24,7 +24,7 @@ class Treatment extends Model
 
     public function facilities(): BelongsToMany
     {
-        return $this->belongsToMany(Facility::class, 'facility_treatment', 'treatment_id', 'facility_id');
+        return $this->belongsToMany(Facility::class, 'facility_treatments', 'treatment_id', 'facility_id');
     }
 
     public function user(): BelongsTo

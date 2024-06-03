@@ -2,7 +2,6 @@
     <div>
         {{-- Breadcrumb start --}}
         <div class="mb-6">
-            {{-- Breadcrumb --}}
             <x-breadcrumb :breadcrumb-items="$breadcrumbItems" :page-title="$pageTitle"/>
         </div>
         {{-- Breadcrumb end --}}
@@ -104,20 +103,36 @@
 
                             {{-- Facility ID start --}}
                             <div class="input-area">
-                                <label for="facility_id" class="form-label">{{ __('Facility') }}</label>
+                                <label for="facility_id" class="form-label">{{ __('Facility') }}<span class="text-red-500">*</span></label>
                                 <div class="relative">
-                                    <select id="facility_id" name="facility_id" class="form-control">
-                                        <option value="">{{ __('Select Facility') }}</option>
-                                        @foreach($facilities as $facility)
-                                            <option value="{{ $facility->id }}" {{ old('facility_id') == $facility->id ? 'selected' : '' }}>
-                                                {{ $facility->name }}
-                                            </option>
-                                        @endforeach
+                                    <select id="facility_id" name="facility_id" class="form-control" required>
+                                        <option selected disabled>{{ __('Select Facility') }}</option>
+                                        @forelse($facilities as $facility)
+                                            <option value="{{ $facility->id }}" {{ old('facility_id') == $facility->id ? 'selected' : '' }}>{{ $facility->name }}</option>
+                                        @empty
+                                            <option value="">{{ __('N/A') }}</option>
+                                        @endforelse
                                     </select>
                                     <x-input-error :messages="$errors->get('facility_id')" class="mt-2"/>
                                 </div>
                             </div>
                             {{-- Facility ID end --}}
+
+                            {{-- Specialties start --}}
+                            <div class="input-area">
+                                <label for="specialty_id" class="form-label">{{ __('Specialties') }}</label>
+                                <div class="relative">
+                                    <select id="specialty_id" name="specialty_id[]" class="form-control select2" multiple>
+                                        @foreach($specialties as $specialty)
+                                            <option value="{{ $specialty->id }}" {{ in_array($specialty->id, old('specialty_id', [])) ? 'selected' : '' }}>
+                                                {{ $specialty->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <x-input-error :messages="$errors->get('specialty_id')" class="mt-2"/>
+                                </div>
+                            </div>
+                            {{-- Specialties end --}}
 
                             {{-- Image start --}}
                             <div class="input-area">

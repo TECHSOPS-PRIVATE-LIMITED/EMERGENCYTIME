@@ -6,6 +6,7 @@ use App\Http\Requests\StoreMedicalStaffRequest;
 use App\Http\Requests\UpdateMedicalStaffRequest;
 use App\Models\MedicalStaff;
 use App\Models\Facility;
+use App\Models\Specialty;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,8 +43,9 @@ class MedicalStaffController extends Controller
         $medicalstaffs = QueryBuilder::for(MedicalStaff::class)
             ->allowedSorts(['name'])
             ->where('name', 'like', "%$q%")
+            ->with('user')
             ->latest()
-            ->paginate($perPage)
+                       ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
 
         return view('site.medical_staffs.index', [
@@ -73,9 +75,11 @@ class MedicalStaffController extends Controller
             ],
         ];
         $facilities = Facility::all();
+        $specialties = Specialty::all();
         return view('site.medical_staffs.create', [
             'breadcrumbItems' => $breadcrumbsItems,
             'facilities' => $facilities,
+            'specialties' => $specialties,
             'pageTitle' => 'Create Medical Staff',
         ]);
     }
@@ -88,7 +92,6 @@ class MedicalStaffController extends Controller
      */
     public function store(StoreMedicalStaffRequest $request): RedirectResponse
     {
-
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
 
@@ -99,7 +102,16 @@ class MedicalStaffController extends Controller
 
             $validated['image'] = 'storage/medical_staff_images/' . $imageName;
         }
-        MedicalStaff::create($validated);
+
+        $medicalStaff = MedicalStaff::create($validated);
+
+        if ($request->filled('facility_id')) {
+            $medicalStaff->facilities()->sync($request->input('facility_id'));
+        }
+        if ($request->filled('specialty_id')) {
+            $medicalStaff->specialties()->sync($request->input('specialty_id'));
+        }
+
         return redirect()->route('medical_staffs.index')->with('message', 'Medical Staff created successfully.');
     }
 

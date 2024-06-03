@@ -24,7 +24,6 @@ return new class extends Migration {
             $table->string('phone', 20);
             $table->string('image', 255)->nullable();
             $table->text('description')->nullable();
-            $table->foreignId('facility_id')->nullable()->constrained('facilities')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')
                 ->cascadeOnDelete();
             $table->timestamps();
