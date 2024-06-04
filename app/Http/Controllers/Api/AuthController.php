@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Auth\ForgotPasswordRequest;
-use App\Http\Requests\Api\Auth\LoginRequest;
-use App\Http\Requests\Api\Auth\OAuthRequest;
-use App\Http\Requests\Api\Auth\RegisterRequest;
-use App\Http\Resources\AuthUserResource;
-use App\Http\Resources\UserResource;
-use App\Models\User;
 use Exception;
-use Illuminate\Http\JsonResponse;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Http\Resources\AuthUserResource;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Validation\ValidationException;
 use Laravel\Socialite\Facades\Socialite;
-use Spatie\Permission\Models\Role;
+use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\OAuthRequest;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\Api\Auth\RegisterRequest;
+use App\Http\Requests\Api\Auth\ForgotPasswordRequest;
 
 class AuthController extends Controller
 {
@@ -32,10 +33,11 @@ class AuthController extends Controller
                 ]
             );
 
-            $userRole = Role::where(['name' => 'user', 'guard_name' => 'sanctum'])->firstOrFail();
-            $user->assignRole($userRole);
+            // $userRole = Role::where(['name','user'])->firstOrFail();
+            $user->assignRole('user');
 
-            $this->sendVerificationEmail($user);
+           // Trigger the email verification notification
+           event(new Registered($user));
 
             $user['token'] = $user->createToken('main')->plainTextToken;
 
