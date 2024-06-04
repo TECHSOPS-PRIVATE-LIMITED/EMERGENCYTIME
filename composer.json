@@ -24,7 +24,6 @@
         "vemcogroup/laravel-translation": "^3.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.7",
         "fakerphp/faker": "^1.9.1",
         "laravel-shift/blueprint": "^2.4",
         "laravel/breeze": "^1.14",
