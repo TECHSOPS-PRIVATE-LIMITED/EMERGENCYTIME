@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/facilities', [FacilityApiController::class, 'index']);
         Route::get('/facilities/{id}', [FacilityApiController::class, 'show']);
 
+        //subscription
+
         // Profile
         Route::post('profile', [ProfileApiController::class,'update']);
 
