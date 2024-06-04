@@ -56,7 +56,7 @@ class StripePaymentController extends Controller
              ]);
 
              Session::flash('success', 'Payment successful!');
-             
+
          } catch (ApiErrorException $e) {
              Session::flash('error', 'Payment failed: ' . $e->getMessage());
 
