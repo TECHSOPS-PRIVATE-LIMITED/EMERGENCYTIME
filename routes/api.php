@@ -64,16 +64,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 });
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $user = $request->user();
-    $request->fulfill();
-    return response()->json(['message' => 'Email verified successfully', 'user' => $user]);
-})->middleware(['signed'])->name('verification.verify');
-
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return response()->json(['message' => 'Verification link sent!']);
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
 // General Settings
 Route::get('general-settings', GeneralSettingsController::class);

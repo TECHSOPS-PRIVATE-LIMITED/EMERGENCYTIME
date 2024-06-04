@@ -62,6 +62,8 @@ class CountrySeeder extends Seeder
             ['name' => 'Cuba', 'code' => '+53'],
             ['name' => 'Cyprus', 'code' => '+357'],
             ['name' => 'Czech Republic', 'code' => '+420'],
+            ['name' => 'United States America', 'code' => '+1'],
+
         ];
 
 
