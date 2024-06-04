@@ -9,7 +9,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "jackiedo/dotenv-editor": "^2.0",
         "laravel/framework": "^9.42.0",
-        "laravel/sanctum": "^3.0",
+        "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "laravolt/avatar": "^4.1",

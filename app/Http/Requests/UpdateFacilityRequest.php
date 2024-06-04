@@ -34,7 +34,7 @@ class UpdateFacilityRequest extends FormRequest
             Rule::unique('facilities')->ignore($this->facility),
         ],
         'country_id' => 'required|exists:countries,id',
-        'phone_number' => 'required|string|regex:/^\d{10,15}$/',
+        'phone_number' => 'required|string|regex:/^[0-9\-\s\(\)]{10,15}$/',
         'address' => 'required|string|max:255',
         'city' => 'required|string|max:60',
         'state' => 'required|string|max:60',
@@ -45,8 +45,8 @@ class UpdateFacilityRequest extends FormRequest
         'closing_hours' => 'nullable|string|max:100',
         'emergency_contact' => 'nullable|string|regex:/^\d{11,15}$/',
         'website' => 'nullable|url|max:255',
-        'longitude' => 'nullable|numeric',
-        'latitude' => 'nullable|numeric',
+        'longitude' => 'nullable|numeric|between:-180,180',
+        'latitude' => 'nullable|numeric|between:-90,90',
     ];
     }
 }

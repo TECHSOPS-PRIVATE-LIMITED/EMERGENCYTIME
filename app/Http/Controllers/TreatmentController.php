@@ -43,6 +43,7 @@ class TreatmentController extends Controller
             ->orWhere('disease_name', 'like', "%$q%")
             ->orWhere('description', 'like', "%$q%")
             ->orWhere('created_at', 'like', "%$q%")
+            ->with('category')
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q]);
 

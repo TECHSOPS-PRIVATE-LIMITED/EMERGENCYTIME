@@ -65,7 +65,7 @@
                                     <label for="phone_number" class="form-label">{{ __('Phone Number') }}<span
                                             class="text-red-500">*</span></label>
                                     <input id="phone_number" name="phone_number" type="text" class="form-control"
-                                           placeholder="2887385893" minlength="10" maxlength="10" required value="{{ old('phone_number') }}">
+                                           placeholder="3099252125" minlength="10" maxlength="10" required value="{{ old('phone_number') }}">
                                     <x-input-error :messages="$errors->get('phone_number')" class="mt-2"/>
                                 </div>
 
@@ -163,6 +163,22 @@
                                            placeholder="Enter Website URL : https://www.emergencytime.com" value="{{ old('website') }}">
                                     <x-input-error :messages="$errors->get('website')" class="mt-2"/>
 
+                                </div>
+
+                                 {{-- longitude --}}
+                                 <div class="input-area">
+                                    <label for="longitude" class="form-label">{{ __('Longitude') }}</label>
+                                    <input type="text" id="longitude" name="longitude" class="form-control"
+                                              placeholder="Enter longitude" value="{{ old('longitude') }}">
+                                    <x-input-error :messages="$errors->get('longitude')" class="mt-2"/>
+                                </div>
+
+                                {{-- latitude --}}
+                                <div class="input-area">
+                                    <label for="latitude" class="form-label">{{ __('Latitude') }}</label>
+                                    <input id="latitude" name="latitude" type="text" class="form-control"
+                                           placeholder="Enter latitude " value="{{ old('latitude') }}">
+                                    <x-input-error :messages="$errors->get('latitude')" class="mt-2"/>
                                 </div>
 
                                 {{-- Address --}}

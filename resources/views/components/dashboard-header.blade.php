@@ -34,7 +34,7 @@
                 <x-nav-lang-dropdown />
                 <x-dark-light />
                 <x-gray-scale />
-                <x-nav-notification-dropdown />
+{{--                <x-nav-notification-dropdown />--}}
                 <x-nav-user-dropdown />
                 <button class="smallDeviceMenuController md:hidden block leading-0">
                     <iconify-icon class="cursor-pointer text-slate-900 dark:text-white text-2xl" icon="heroicons-outline:menu-alt-3"></iconify-icon>

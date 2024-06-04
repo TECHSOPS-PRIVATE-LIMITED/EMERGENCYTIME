@@ -56,11 +56,6 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <h1>{{ __('Sign In') }}</h1>
-            <div class="social-icons">
-                <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
-                <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            </div>
-            <span>{{ __('or use your email for sign-in') }}</span>
 
             <input type="email" name="email" placeholder="Email">
             @error('email')
@@ -77,7 +72,6 @@
     <div class="toggle-container">
         <div class="toggle">
             <div class="toggle-panel toggle-left">
-                <h1>Hello Friend!</h1>
                 <p>Register yourself so we can help you further</p>
                 <button class="hidden" id="login"> Sign In</button>
             </div>
