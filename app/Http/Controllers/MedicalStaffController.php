@@ -6,12 +6,15 @@ use App\Http\Requests\StoreMedicalStaffRequest;
 use App\Http\Requests\UpdateMedicalStaffRequest;
 use App\Models\MedicalStaff;
 use App\Models\Facility;
+use App\Models\Specialty;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Arr;
+
 
 class MedicalStaffController extends Controller
 {
@@ -42,8 +45,9 @@ class MedicalStaffController extends Controller
         $medicalstaffs = QueryBuilder::for(MedicalStaff::class)
             ->allowedSorts(['name'])
             ->where('name', 'like', "%$q%")
+            ->with('user')
             ->latest()
-            ->paginate($perPage)
+                       ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
 
         return view('site.medical_staffs.index', [
@@ -73,9 +77,11 @@ class MedicalStaffController extends Controller
             ],
         ];
         $facilities = Facility::all();
+        $specialties = Specialty::all();
         return view('site.medical_staffs.create', [
             'breadcrumbItems' => $breadcrumbsItems,
             'facilities' => $facilities,
+            'specialties' => $specialties,
             'pageTitle' => 'Create Medical Staff',
         ]);
     }
@@ -88,7 +94,6 @@ class MedicalStaffController extends Controller
      */
     public function store(StoreMedicalStaffRequest $request): RedirectResponse
     {
-
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
 
@@ -96,10 +101,18 @@ class MedicalStaffController extends Controller
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->storeAs('public/medical_staff_images', $imageName);
-
             $validated['image'] = 'storage/medical_staff_images/' . $imageName;
         }
-        MedicalStaff::create($validated);
+
+        $medicalStaff = MedicalStaff::create(Arr::except($validated, ['facility_id', 'specialty_id']));
+
+        if ($request->filled('facility_id')) {
+            $medicalStaff->facilities()->sync($request->input('facility_id'));
+        }
+        if ($request->filled('specialty_id')) {
+            $medicalStaff->specialties()->sync($request->input('specialty_id'));
+        }
+
         return redirect()->route('medical_staffs.index')->with('message', 'Medical Staff created successfully.');
     }
 
@@ -123,12 +136,17 @@ class MedicalStaffController extends Controller
                 'active' => true
             ]
         ];
+
+        $medicalStaff->load('specialties');
+        $medicalStaff->load('facilities');
+
         return view('site.medical_staffs.show', [
             'breadcrumbItems' => $breadcrumbsItems,
             'medicalStaff' => $medicalStaff,
             'pageTitle' => 'Show Medical Staff'
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -152,13 +170,20 @@ class MedicalStaffController extends Controller
         ];
 
         $facilities = Facility::all();
+        $specialties = Specialty::all();
+
+        $medicalStaff->load('specialties');
+        $medicalStaff->load('facilities');
+
         return view('site.medical_staffs.edit', [
             'breadcrumbItems' => $breadcrumbsItems,
             'medicalStaff' => $medicalStaff,
             'facilities' => $facilities,
+            'specialties' => $specialties,
             'pageTitle' => 'Edit Medical Staff'
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -180,17 +205,18 @@ class MedicalStaffController extends Controller
 
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-
-            // Store the new image in the public disk under 'medical_staff_images'
             $image->storeAs('public/medical_staff_images', $imageName);
-
-            // Update the image path in the validated data
             $validated['image'] = 'storage/medical_staff_images/' . $imageName;
         }
 
-        $medicalStaff->update($validated);
+        $medicalStaff->update(Arr::except($validated, ['facility_id', 'specialty_id']));
+ if ($request->filled('facility_id')) {
+            $medicalStaff->facilities()->sync($request->input('facility_id'));
+        }
+        if ($request->filled('specialty_id')) {
+            $medicalStaff->specialties()->sync($request->input('specialty_id'));
+        }
 
-        // Redirect back to the index page with a success message
         return redirect()->route('medical_staffs.index')->with('message', 'Medical Staff updated successfully.');
     }
 
@@ -206,6 +232,9 @@ class MedicalStaffController extends Controller
             $imagePath = str_replace('storage', 'public', $medicalStaff->image);
             Storage::delete($imagePath);
         }
+        $medicalStaff->specialties()->detach();
+        $medicalStaff->facilities()->detach();
+
         $medicalStaff->delete();
 
         return redirect()->route('medical_staffs.index')->with('message', 'Medical Staff deleted successfully.');

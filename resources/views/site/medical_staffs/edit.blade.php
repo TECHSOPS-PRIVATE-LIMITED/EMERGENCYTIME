@@ -103,6 +103,40 @@
                             </div>
                             {{-- medical_license_number end --}}
 
+                            {{-- facility_id start --}}
+                            <div class="input-area">
+                                <label for="facility_id" class="form-label">{{ __('Facility') }}</label>
+                                <div class="relative">
+                                    <select id="facility_id" name="facility_id" class="form-control">
+                                        @foreach($facilities as $facility)
+                                            <option
+                                                value="{{ $facility->id }}" {{ $medicalStaff->facilities->contains($facility) ? 'selected' : '' }}>
+                                                {{ $facility->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <x-input-error :messages="$errors->get('facility_id')" class="mt-2"/>
+                                </div>
+                            </div>
+                            {{-- facility_id end --}}
+
+                            {{-- specialites start --}}
+                            <div class="input-area">
+                                <label for="specialty_id" class="form-label">{{ __('Specialty') }}</label>
+                                <div class="relative">
+                                    <select class="form-control" multiple name="specialty_id[]">
+                                        @foreach ($specialties as $specialty)
+                                            <option value="{{ $specialty->id }}"
+                                                @selected(in_array($specialty->id, $medicalStaff->specialties->pluck('id')->toArray()))>
+                                                {{ $specialty->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <x-input-error :messages="$errors->get('specialty_id')" class="mt-2"/>
+                                </div>
+                            </div>
+                            {{-- specialites end --}}
+
                             {{-- gender start --}}
                             <div class="input-area">
                                 <label for="gender" class="form-label">{{ __('Gender') }}<span
@@ -197,23 +231,6 @@
                                 </div>
                             </div>
                             {{-- description end --}}
-
-                            {{-- facility_id start --}}
-                            <div class="input-area">
-                                <label for="facility_id" class="form-label">{{ __('Facility') }}</label>
-                                <div class="relative">
-                                    <select id="facility_id" name="facility_id" class="form-control" >
-                                        @foreach ($facilities as $facility)
-                                            <option
-                                                value="{{ $facility->id }}" {{ old('facility_id', $medicalStaff->facility_id) == $facility->id ? 'selected' : '' }}>
-                                                {{ $facility->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <x-input-error :messages="$errors->get('facility_id')" class="mt-2"/>
-                                </div>
-                            </div>
-                            {{-- facility_id end --}}
 
                         </div>
                         {{-- update button start --}}

@@ -39,29 +39,25 @@ class Facility extends Model
         return $this->belongsTo(User::class);
     }
 
-    //medical staff
-    public function medicalStaff(): HasMany
+    public function medicalStaffs(): BelongsToMany
     {
-        return $this->hasMany(MedicalStaff::class);
+        return $this->belongsToMany(MedicalStaff::class, 'facility_medical_staff');
     }
 
-    // Equipment
-    public function equipment(): BelongsToMany
+    public function equipments(): BelongsToMany
     {
         return $this->belongsToMany(Equipment::class, 'facility_equipment', 'facility_id', 'equipment_id');
     }
 
-    // Treatments
     public function treatments(): BelongsToMany
     {
-        return $this->belongsToMany(Treatment::class, 'facility_treatment', 'facility_id', 'treatment_id');
+        return $this->belongsToMany(Treatment::class, 'facility_treatments', 'facility_id', 'treatment_id');
     }
 
-// Country
-public function country(): BelongsTo
-{
-    return $this->belongsTo(Country::class);
-}
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
 
 
 }

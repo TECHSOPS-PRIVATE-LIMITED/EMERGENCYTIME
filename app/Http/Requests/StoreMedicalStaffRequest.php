@@ -38,6 +38,7 @@ class StoreMedicalStaffRequest extends FormRequest
                 'image' => 'nullable|image|max:5120',
                 'description' => 'nullable|string',
                 'facility_id' => 'nullable|exists:facilities,id',
+                'specialty_id' => 'nullable|exists:specialties,id|array'
             ];
     }
 

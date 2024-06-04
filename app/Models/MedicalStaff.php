@@ -13,32 +13,28 @@ class MedicalStaff extends Model
 
     protected $fillable = [
         'name',
-       'email',
-       'medical_license_number',
-       'gender',
-       'current_employment',
-       'dob',
-       'address',
-       'phone',
+        'email',
+        'medical_license_number',
+        'gender',
+        'current_employment',
+        'dob',
+        'address',
+        'phone',
         'description',
-        'facility_id',
         'image',
         'user_id'
     ];
 
-    // Facility
-    public function facility(): BelongsTo
+    public function facilities(): BelongsToMany
     {
-        return $this->belongsTo(Facility::class);
+        return $this->belongsToMany(Facility::class, 'facility_medical_staff');
     }
 
-    // Specialties
     public function specialties(): BelongsToMany
     {
         return $this->belongsToMany(Specialty::class, 'medical_staff_specialties', 'medical_staff_id', 'specialty_id');
     }
 
-    //user
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

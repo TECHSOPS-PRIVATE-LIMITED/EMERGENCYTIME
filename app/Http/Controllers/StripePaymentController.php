@@ -51,7 +51,7 @@ class StripePaymentController extends Controller
                  'start_date' => now(),
                  'end_date' => now()->addMonth(),
                  'auto_renew' => true,
-                 'price' => 100,
+                 'price' => 5,
                  'status' => 'active',
              ]);
 
