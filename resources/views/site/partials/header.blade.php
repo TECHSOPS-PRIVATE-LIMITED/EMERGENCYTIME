@@ -12,8 +12,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="">
-                        <img class="logo logo-light" src="{{ asset('images/logo.png') }}" alt="logo" />
-                        <img class="logo logo-color" src="{{ asset('images/logo.png') }}" alt="logo" />
+                        <img class="logo logo-light" src="{{ asset('images/logo.png') }}" alt="logo" style="height: auto; max-height: 70px;" />
+                        <img class="logo logo-color" src="{{ asset('images/logo.png') }}" alt="logo" style="height: auto; max-height: 70px;" />
                     </a>
                 </div>
 
@@ -23,7 +23,6 @@
                         <li><a class="nav-item" href="#home">Home</a></li>
                         <li><a class="nav-item" href="#about">About</a></li>
                         <li><a class="nav-item" href="#features">Features</a></li>
-                        <li><a class="nav-item" href="#screenshots">Screenshots</a></li>
                         <li><a class="nav-item" href="#pricing">Pricing</a></li>
                         <li><a class="nav-item" href="#testimonial">Testimonial</a></li>
                         <li><a class="nav-item" href="#contacts">Contact Us</a></li>
@@ -57,7 +56,7 @@
                         </ul>
                     </div>
                 </div><!-- .col -->
-                <div class="col-md-6 text-center">
+                <div class="text-center col-md-6">
                     <div class="alt-header-mockup">
                         <img class="mockup-left wow fadeInLeft" data-wow-duration=".5s" data-wow-delay=".9s" src="{{ asset('site/images/header-screen-2.jpg') }}" alt="header-screen" />
                         <img class="mockup-middle wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".6s" src="{{ asset('site/images/header-screen-1.jpg') }}" alt="header-screen" />

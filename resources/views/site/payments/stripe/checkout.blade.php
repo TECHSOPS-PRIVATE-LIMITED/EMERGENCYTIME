@@ -1,175 +1,116 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Emergency Time - Stripe Payment Gateway Integration</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {{-- <script src="{{ asset('site/assets/js/jquery.js') }}"></script> --}}
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+			rel="stylesheet"
+		/>
+            <title>Payment | Emergency Time</title>
+    <link rel="stylesheet" href="{{ asset('site/assets/css/payment-form.css') }}">
 </head>
-
 <body>
+<div class="card">
+    <div class="card__header">
+        <img src="{{ asset('images/logo.png') }}" class="logo" width="70" height="70" />
+        {{-- <h1>Payment information</h1> --}}
+    </div>
 
-    <div class="container">
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
 
-        <h1 class="text-center" style="margin-bottom: 50px;" >Stripe Payment Gateway </h1>
+    @if (Session::has('error'))
+        <div class="alert alert-danger">
+            {{ Session::get('error') }}
+        </div>
+    @endif
 
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="panel panel-default credit-card-box">
-                    <div class="panel-heading display-table">
-                        <h3 class="panel-title">Payment Details</h3>
-                    </div>
-                    <div class="panel-body">
+    <form role="form" action="{{ route('stripe.post') }}" method="post" id="payment-form">
+        @csrf
+        <div class="form-group">
+            <label for="full-name">Full Name</label>
+            <input class="full-name empty" type="text" id="full-name" aria-label="Full Name"
+                   placeholder="Alex Montoya" required/>
+        </div>
 
-                        @if (Session::has('success'))
-                            <div class="alert alert-success text-center">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                <p>{{ Session::get('success') }}</p>
-                            </div>
-                        @endif
-
-
-                        @if (Session::has('error'))
-                            <div class="alert alert-danger text-center">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                <p>{{ Session::get('error') }}</p>
-                            </div>
-                        @endif
-
-
-                        <form role="form" action="{{ route('stripe.post') }}" method="post"
-                            class="require-validation" data-cc-on-file="false"
-                            data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
-                            @csrf
-
-                            <div class='form-row row'>
-                                <div class='col-xs-12 form-group required'>
-                                    <label class='control-label'>Name on Card</label> <input class='form-control'
-                                        size='4' type='text'>
-                                </div>
-                            </div>
-
-                            <div class='form-row row'>
-                                <div class='col-xs-12 form-group card required'>
-                                    <label class='control-label'>Card Number</label> <input autocomplete='off'
-                                        class='form-control card-number' size='20' type='text'>
-                                </div>
-                            </div>
-
-                            <div class='form-row row'>
-                                <div class='col-xs-12 col-md-4 form-group cvc required'>
-                                    <label class='control-label'>CVC</label> <input autocomplete='off'
-                                        class='form-control card-cvc' placeholder='ex. 311' size='4'
-                                        type='text'>
-                                </div>
-                                <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                    <label class='control-label'>Expiration Month</label> <input
-                                        class='form-control card-expiry-month' placeholder='MM' size='2'
-                                        type='text'>
-                                </div>
-                                <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                    <label class='control-label'>Expiration Year</label> <input
-                                        class='form-control card-expiry-year' placeholder='YYYY' size='4'
-                                        type='text'>
-                                </div>
-                            </div>
-
-                            <div class='form-row row'>
-                                <div class='col-md-12 error form-group hide'>
-                                    <div class='alert-danger alert'>Please correct the errors and try
-                                        again.</div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now
-                                        ($5)</button>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
+        <div class="icon-group-container">
+            <label for="card-number">Card Number</label>
+            <div class="icon-group empty">
+                <input type="text" id="card-number" aria-label="Card Number" class="empty"
+                       placeholder="1234 1234 1234 1234" required/>
+                <img id="card-icon" src="{{ asset('site/assets/icons/credit-card.png') }}" height="14" width="14"/>
             </div>
         </div>
 
+        <div class="row-group">
+            <div class="form-group">
+                <label for="expiration">Expiration Date</label>
+                <input class="expiration-input empty" type="tel" id="expiration" minlength="5" maxlength="5"
+                        placeholder="MM/YY" required/>
+            </div>
+            <div class="icon-group-container">
+                <label for="cvv">CVV</label>
+                <div class="icon-group empty">
+                    <input class="cvv-input empty" type="tel" maxlength="3" placeholder="···" id="cvv" required/>
+                    <img id="info-icon" src="{{ asset('images/result-not-found.svg') }}" height="14" width="14"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cardholder-name">Address</label>
+            <input type="text" id="address" class="empty" aria-label="adress" placeholder="Av. Morelos 123"
+                   required/>
+        </div>
+        <div id="error-message"></div>
+        <button id="submit-button" type="submit">Confirm payment</button>
+    </form>
+    <div class="verify-info">
+        <small>Verify the information is correct</small>
     </div>
+</div>
+<script src="https://js.stripe.com/v2/"></script>
+<script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+<script src="{{ asset('site/assets/js/payment-form.js') }}" defer></script>
 
+<script>
+    var stripe = Stripe('{{ env('STRIPE_KEY') }}');
 
+    document.getElementById('payment-form').addEventListener('submit', function (event) {
+        event.preventDefault();
 
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
-    <script type="text/javascript">
-        $(function() {
-
-            /*------------------------------------------
-            --------------------------------------------
-            Stripe Payment Code
-            --------------------------------------------
-            --------------------------------------------*/
-
-            var $form = $(".require-validation");
-
-            $('form.require-validation').bind('submit', function(e) {
-                var $form = $(".require-validation"),
-                    inputSelector = ['input[type=email]', 'input[type=password]',
-                        'input[type=text]', 'input[type=file]',
-                        'textarea'
-                    ].join(', '),
-                    $inputs = $form.find('.required').find(inputSelector),
-                    $errorMessage = $form.find('div.error'),
-                    valid = true;
-                $errorMessage.addClass('hide');
-
-                $('.has-error').removeClass('has-error');
-                $inputs.each(function(i, el) {
-                    var $input = $(el);
-                    if ($input.val() === '') {
-                        $input.parent().addClass('has-error');
-                        $errorMessage.removeClass('hide');
-                        e.preventDefault();
-                    }
-                });
-
-                if (!$form.data('cc-on-file')) {
-                    e.preventDefault();
-                    Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-                    Stripe.createToken({
-                        number: $('.card-number').val(),
-                        cvc: $('.card-cvc').val(),
-                        exp_month: $('.card-expiry-month').val(),
-                        exp_year: $('.card-expiry-year').val()
-                    }, stripeResponseHandler);
-                }
-
-            });
-
-            /*------------------------------------------
-            --------------------------------------------
-            Stripe Response Handler
-            --------------------------------------------
-            --------------------------------------------*/
-            function stripeResponseHandler(status, response) {
-                if (response.error) {
-                    $('.error')
-                        .removeClass('hide')
-                        .find('.alert')
-                        .text(response.error.message);
-                } else {
-                    /* token contains id, last4, and card type */
-                    var token = response['id'];
-
-                    $form.find('input[type=text]').empty();
-                    $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-                    $form.get(0).submit();
-                }
+        stripe.createToken('card', {
+            name: document.getElementById('full-name').value,
+            address_line1: document.getElementById('address').value,
+            address_city: 'City', // Update with city name
+            address_state: 'State', // Update with state name
+            address_zip: '12345', // Update with zip code
+        }).then(function (result) {
+            if (result.error) {
+                var errorElement = document.getElementById('error-message');
+                errorElement.textContent = result.error.message;
+            } else {
+                stripeTokenHandler(result.token);
             }
-
         });
-    </script>
-</body>
+    });
 
+    function stripeTokenHandler(token) {
+        var form = document.getElementById('payment-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+
+        form.submit();
+    }
+</script>
+</body>
 </html>
