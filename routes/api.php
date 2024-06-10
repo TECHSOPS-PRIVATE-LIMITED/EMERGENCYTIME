@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::apiSingleton('env', EnvironmentController::class);
-    Route::group(['middleware' => 'verified', 'as' => 'api.v1.'], function () {
+    Route::group(['as' => 'api.v1.'], function () {
         Route::post('password-change', [AuthController::class, 'changePassword']);
         Route::apiResource('users', UserController::class);
         Route::delete('users-delete-many', [UserController::class, 'destroyMany']);
