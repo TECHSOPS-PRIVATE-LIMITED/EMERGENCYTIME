@@ -19,6 +19,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\AssignToFacilityController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ReplicateModelTokenController;
 
 require __DIR__ . '/auth.php';
 
@@ -100,4 +101,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], functi
     //Assign to hospitals
     Route::get('assign-to-facility', [AssignToFacilityController::class, 'index'])->name('assign.to.facility.index');
     Route::post('assign-to-facility', [AssignToFacilityController::class, 'store'])->name('assign.to.facility.store');
+
+    // Store Replicate Token
+    Route::post('store_token', [ReplicateModelTokenController::class, 'store_token'])->name('store_token');
+    Route::get('create_token', [ReplicateModelTokenController::class, 'create_token'])->name('create_token');
+    Route::get('show_token', [ReplicateModelTokenController::class, 'show_token'])->name('show_token');
+    Route::delete('delete_token/{token}', [ReplicateModelTokenController::class, 'delete_token'])->name('delete_token');
+
 });

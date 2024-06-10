@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\GeneralSettingsController;
 use App\Http\Controllers\Api\SubscriptionApiController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Api\GeneralSettingsMediaController;
+use App\Http\Controllers\ReplicateModelTokenController;
 
 /*
  * API Routes
@@ -61,6 +62,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         // Profile
         Route::post('profile', [ProfileApiController::class, 'update']);
+
+        //Replicate Model Token
+        Route::get('model_token',[ReplicateModelTokenController::class,'index']);
     });
 });
 
