@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::apiResource('permissions', PermissionController::class);
         Route::resource('roles', RoleController::class)->except('edit');
         Route::put('general-settings-images', GeneralSettingsMediaController::class);
+        Route::delete('/account', [UserController::class, 'deleteAccount']);
+
         // Database Backup
         Route::apiResource('database-backups', DatabaseBackupController::class)->only(['index', 'destroy']);
         Route::get('database-backups-create', [DatabaseBackupController::class, 'createBackup']);

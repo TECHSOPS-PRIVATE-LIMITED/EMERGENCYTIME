@@ -13,6 +13,8 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\QueryBuilder;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,19 +40,19 @@ class UserController extends Controller
         $sort = $request->get('sort');
 
         $users = QueryBuilder::for(User::class)
-                            ->with([
-                                'roles' => [
-                                    'permissions',
-                                ]
-                            ])
-                            ->allowedSorts(['name', 'email','phone', 'post_code', 'city', 'country', 'created_at'])
-                            ->where('name', 'like', "%$q%")
-                            ->orWhere('email', 'like', "%$q%")
-                            ->WithoutAuthUser()
-                            ->WithoutSuperAdmin()
-                            ->latest()
-                            ->paginate($perPage)
-                            ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
+            ->with([
+                'roles' => [
+                    'permissions',
+                ]
+            ])
+            ->allowedSorts(['name', 'email', 'phone', 'post_code', 'city', 'country', 'created_at'])
+            ->where('name', 'like', "%$q%")
+            ->orWhere('email', 'like', "%$q%")
+            ->WithoutAuthUser()
+            ->WithoutSuperAdmin()
+            ->latest()
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
 
         return UserCollection::make($users);
     }
@@ -58,7 +60,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StoreUserRequest  $request
+     * @param StoreUserRequest $request
      * @return JsonResponse
      */
     public function store(StoreUserRequest $request)
@@ -78,7 +80,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  User  $user
+     * @param User $user
      * @return JsonResponse
      */
     public function show(User $user)
@@ -89,8 +91,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateUserRequest  $request
-     * @param  User  $user
+     * @param UpdateUserRequest $request
+     * @param User $user
      * @return JsonResponse
      */
     public function update(UpdateUserRequest $request, User $user)
@@ -106,7 +108,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  User  $user
+     * @param User $user
      * @return JsonResponse
      */
     public function destroy(User $user)
@@ -127,4 +129,36 @@ class UserController extends Controller
 
         return $this->responseWithSuccess('Users deleted successful!');
     }
+
+    public function deleteAccount(Request $request)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            try {
+                DB::beginTransaction();
+
+                // Delete related models
+                $user->facilities()->delete();
+                $user->equipments()->delete();
+                $user->medicalStaffs()->delete();
+                $user->specialities()->delete();
+                $user->treatments()->delete();
+                $user->subscription()->delete();
+                $user->delete();
+
+                DB::commit();
+
+                return response()->json(['message' => 'Account deleted successfully'], 200);
+            } catch (\Exception $e) {
+                DB::rollBack();
+
+                return response()->json(['error' => 'Something went wrong, please try again later'], 500);
+            }
+        } else {
+            return response()->json(['error' => 'Unauthenticated'], 401);
+        }
+
+    }
+
 }
