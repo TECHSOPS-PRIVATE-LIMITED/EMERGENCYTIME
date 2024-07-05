@@ -57,7 +57,7 @@ class RegisteredUserController extends Controller
             return to_route('register')->with('error', $e->getMessage());
         }
 
-//        event(new Registered($user));
+       event(new Registered($user));
 
         Auth::login($user);
 
